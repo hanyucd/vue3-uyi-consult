@@ -1,0 +1,38 @@
+{
+  // 属性指定所要编译的文件列表
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "compilerOptions": {
+    // 指定编译出来的 JavaScript 代码的 ECMAScript 版本
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    // 指定编译产物的模块格式。它的默认值与target属性有关
+    "module": "ESNext",
+    // 描述项目需要加载的 TypeScript 内置类型描述文件
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    // 确定模块路径的算法，即如何查找模块
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    // 允许 import 命令导入 JSON 文件
+    "resolveJsonModule": true,
+    // 设置如果当前 TypeScript 脚本作为单个模块编译，是否会因为缺少其他脚本的类型信息而报错
+    "isolatedModules": true,
+    // 设置是否产生编译结果
+    "noEmit": true,
+    // 设置如何处理.tsx文件
+    "jsx": "preserve",
+
+    /* Linting */
+    // 打开 TypeScript 的严格检查
+    "strict": true,
+    // 设置是否允许未使用的局部变量
+    "noUnusedLocals": true,
+    // 设置是否允许未使用的函数参数
+    "noUnusedParameters": true,
+    // 设置是否对没有break语句（或者return和throw语句）的 switch 分支报错，即case代码里面必须有终结语句（比如break）
+    "noFallthroughCasesInSwitch": true
+  },
+}
