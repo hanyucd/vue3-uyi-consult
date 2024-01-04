@@ -33,6 +33,10 @@
     // 设置是否允许未使用的函数参数
     "noUnusedParameters": true,
     // 设置是否对没有break语句（或者return和throw语句）的 switch 分支报错，即case代码里面必须有终结语句（比如break）
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    // 设置模块名和模块路径的映射
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
 }
