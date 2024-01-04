@@ -12,7 +12,7 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts}": [
+    "**/*.{vue,js,ts}": [
       "eslint --fix"
     ]
   },
