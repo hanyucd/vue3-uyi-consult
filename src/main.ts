@@ -8,5 +8,3 @@ const app = createApp(App);
 app.use(pinia);
 
 app.mount('#app');
-
-main = '33';
