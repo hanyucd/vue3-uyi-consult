@@ -12,6 +12,6 @@ app.mount('#app');
 // aaa = 9
 const hanyu: string = 'eee';
 
-hanyu = 888;
+hanyu = 999;
 
-console.log(hanyu);
+// console.log(hanyu);
