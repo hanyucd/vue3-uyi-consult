@@ -9,4 +9,4 @@ app.use(pinia);
 
 app.mount('#app');
 
-a = 8;
+aaa = 8;
