@@ -10,8 +10,7 @@ app.use(pinia);
 app.mount('#app');
 
 // aaa = 9
-const hanyu: string = 'eee';
-
-hanyu = 999;
+// const hanyu: string = 'eee';
+// hanyu = 999
 
 // console.log(hanyu);
