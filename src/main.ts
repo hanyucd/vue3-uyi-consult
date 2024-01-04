@@ -1,16 +1,14 @@
 import { createApp } from 'vue';
 // import './style.css'
 import App from './App.vue';
+import router from './router';
 
 import pinia from './stores';
 
 const app = createApp(App);
+
+app.use(router);
 app.use(pinia);
 
 app.mount('#app');
 
-// aaa = 9
-// const hanyu: string = 'eee';
-// hanyu = 999
-
-// console.log(hanyu);
