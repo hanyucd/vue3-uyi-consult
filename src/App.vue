@@ -11,20 +11,36 @@
 
   <div class="div-test">容器</div>
 
-  <van-button type="primary">主要按钮</van-button>
-  <van-button type="success">成功按钮</van-button>
-  <van-button type="default">默认按钮</van-button>
-  <van-button type="warning">警告按钮</van-button>
-  <van-button type="danger">危险按钮</van-button>
+  <van-button type="primary" @click="setUserClick">主要按钮</van-button>
+  <van-button type="primary" @click="getUserInfo">主要按钮</van-button>
 
   <RouterView />
 </template>
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores';
+import api from '@/api';
 const userStore = useUserStore();
 
-console.log(userStore.a);
+console.log(userStore);
+
+const setUserClick = () => {
+  userStore.setUserAction({
+    token: 'token',
+    refreshToken: 'refreshToken',
+    avatar: 'avatar',
+    // 脱敏手机号
+    mobile: '14333',
+    // 用户名
+    account: 'xiaoMing',
+    // 用户id
+    id: '834'
+  });
+};
+
+const getUserInfo = () => {
+  api.fetchUserInfoApi().then(res => console.log(res));
+};
 
 </script>
 

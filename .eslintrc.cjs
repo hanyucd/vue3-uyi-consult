@@ -33,6 +33,7 @@ module.exports = {
     // typeScript (https://typescript-eslint.io/rules)
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/ban-types': 'off',
 
     // vue (https://eslint.vuejs.org/rules)
     'vue/singleline-html-element-content-newline': 'off', // 在单行元素的内容前后需要换行符
