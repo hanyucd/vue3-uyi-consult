@@ -8,3 +8,10 @@ const app = createApp(App);
 app.use(pinia);
 
 app.mount('#app');
+
+// aaa = 9
+const hanyu: string = 'eee';
+
+hanyu = 888;
+
+console.log(hanyu);
