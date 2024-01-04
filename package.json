@@ -6,15 +6,34 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{vue,js,jsx,ts,tsx,json}": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
-    "vue": "^3.3.11"
+    "axios": "^1.6.3",
+    "pinia": "^2.1.7",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "@vitejs/plugin-vue": "^4.5.2",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
+    "vite-plugin-eslint": "^1.8.1",
     "vue-tsc": "^1.8.25"
   }
 }
