@@ -9,4 +9,4 @@ app.use(pinia);
 
 app.mount('#app');
 
-// aa = 999;
+aa = 999;
