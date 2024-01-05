@@ -1,8 +1,6 @@
 <template>
   <div>
-    <NavBar />
-
-    登录
+    导航
   </div>
 </template>
 
@@ -10,6 +8,6 @@
 
 </script>
 
-<style scoped>
-
+<style lange="scss">
+@import './style.scss';
 </style>

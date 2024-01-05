@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <van-button type="primary" @click="setUserClick">主要按钮</van-button>
-    <van-button type="primary" @click="getUserInfo">主要按钮</van-button>
-
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
 
 <script setup lang="ts">
