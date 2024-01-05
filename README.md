@@ -1,6 +1,6 @@
 # 移动端: uyi-h5
 
-技术栈：Vue3 + Typescript + Pinia + Vite + Vant + Postcss + Pnpm + Husky + Eslint + ~~Prettier~~
+技术栈：Vue3 + Typescript + Pinia + Vite + Axios + Vant + Postcss + Pnpm + Husky + Eslint + ~~Prettier~~
 
 其他：
 - pinia-plugin-persistedstate（适用于 Pinia 的持久化存储插件）

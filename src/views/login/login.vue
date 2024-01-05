@@ -4,19 +4,29 @@
 
     <!-- 头部 -->
     <div class="login-head">
-      <h3>密码登录</h3>
-      <a href="javascript:;">
-        <span>短信验证码登录</span>
+      <h3>{{ isPasswordLogin ? '密码登录' : '短信验证码登录' }}</h3>
+      <a href="javascript:;" @click="isPasswordLogin = !isPasswordLogin">
+        <span>{{ !isPasswordLogin ? '密码登录' : '短信验证码登录' }}</span>
         <van-icon name="arrow" />
       </a>
     </div>
 
     <!-- 表单 -->
-    <van-form @submit="submitUserLogin">
+    <van-form ref="loginFormRef" autocomplete="off" @submit="submitUserLogin">
+      <!-- 手机号 -->
       <van-field v-model="mobile" :rules="mobileRules" name="mobile" placeholder="请输入手机号" type="tel" />
-      <van-field v-model="password" :rules="passwordRules" placeholder="请输入密码" type="password">
+      <!-- 密码 -->
+      <van-field v-if="isPasswordLogin" v-model="password" :rules="passwordRules" placeholder="请输入密码" type="password">
         <template #button>
-          <van-button size="small" type="primary">发送验证码</van-button>
+          密码
+        </template>
+      </van-field>
+      <!-- 验证码 -->
+      <van-field v-else v-model="code" :rules="codeRules" placeholder="短信验证码">
+        <template #button>
+          <span class="btn-send" :class="{ active: smsTime > 0 }" @click="sendSMScode">
+            {{ smsTime > 0 ? `${ smsTime }s后再次发送` : '发送验证码' }}
+          </span>
         </template>
       </van-field>
 
@@ -51,21 +61,23 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { mobileRules, passwordRules, codeRules } from '@/utils/ruleUtil';
 import { useUserStore } from '@/stores';
 import useProxyHook from '@/hooks/useProxyHook';
+import { useMobileHook } from '@/hooks/useUserHook';
 import { useRoute, useRouter } from 'vue-router';
 import { showToast, showSuccessToast } from 'vant';
 
-const userStore = useUserStore();
-
-const proxy = useProxyHook();
-const router = useRouter();
-const route = useRoute();
-
 // 手机号 13230000001 - 13230000100
 // 密码 abc12345
-let mobile = ref<string>('');
-let password = ref<string>('');
-let code = ref<string>('');
-let agreeProtocol = ref<boolean>(false);
+const mobile = ref<string>(''); // 手机号
+const password = ref<string>(''); // 密码
+const code = ref<string>(''); // 验证码
+const agreeProtocol = ref<boolean>(false); // 是否同意协议
+const isPasswordLogin = ref<boolean>(false); // 是否密码登录
+
+const router = useRouter();
+const route = useRoute();
+const proxy = useProxyHook();
+const userStore = useUserStore();
+const { smsTime, loginFormRef, sendSMScode } = useMobileHook(mobile);
 
 // 控制密码是否显示
 // let show = ref<boolean>(false);

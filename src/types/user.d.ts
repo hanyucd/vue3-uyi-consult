@@ -11,3 +11,11 @@ export type User = {
   // 用户id
   id: string
 }
+
+// 验证码类型
+export type CodeType =
+  | 'login'
+  | 'register'
+  | 'changeMobile'
+  | 'forgetPassword'
+  | 'bindMobile'
