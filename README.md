@@ -1,11 +1,13 @@
 # 移动端: uyi-h5
 
-技术栈：Vue3 + Typescript + Pinia + Vite + Axios + Vant + Postcss + Pnpm + Husky + Eslint + ~~Prettier~~
+技术栈：Vue3 + Typescript + Pinia + Vite + Axios + Vant + Scss + Postcss + Pnpm + Husky + Eslint + ~~Prettier~~
 
-其他：
-- pinia-plugin-persistedstate（适用于 Pinia 的持久化存储插件）
-- unplugin-vue-components（按需自动导入组件）
-- unplugin-auto-import（按需自动导入 API）
+次要：
+- pinia-plugin-persistedstate 适用于 Pinia 的持久化存储插件
+- unplugin-vue-components 按需自动导入组件
+- unplugin-auto-import 按需自动导入 API
+- vite-plugin-svg-icons 用于生成 svg 雪碧图
+- postcss-px-to-viewport 将px单位转换为视口单位的 (vw, vh, vmin, vmax) 的 PostCSS 插件.
 
 ### 参考
 [eslint-plugin-vue中文文档](https://www.cnblogs.com/qq3279338858/p/16617032.html)

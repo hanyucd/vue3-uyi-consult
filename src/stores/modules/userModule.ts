@@ -2,11 +2,10 @@ import { defineStore } from 'pinia';
 import type { User } from '@/types/user';
 
 export const useUserStore = defineStore('userModule', {
-  // persist: {
-  //   key: 'user_info',
-  //   paths: ['user.token', 'user.mobile']
-  // },
-  persist: true,
+  // persist: true,
+  persist: {
+    key: 'user_info'
+  },
 
   state: () => ({
     user: {} as User | {}

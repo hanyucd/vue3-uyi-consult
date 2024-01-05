@@ -44,5 +44,3 @@ export const useMobileHook = (mobile: Ref<string>, type: CodeType = 'login') => 
     sendSMScode
   };
 };
-
-string;

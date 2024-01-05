@@ -7,6 +7,7 @@ import api from '@/api';
 import 'normalize.css/normalize.css';
 import 'vant/lib/index.css';
 import './styles/main.scss';
+import 'virtual:svg-icons-register';
 
 const app = createApp(App);
 

@@ -53,6 +53,10 @@
         <img src="@/assets/qq.svg" alt="" />
       </div>
     </div>
+
+    <svg aria-hidden="true" class="cp-icon">
+      <use href="#icon-consult-alipay" />
+    </svg>
   </div>
 </template>
 
@@ -71,7 +75,7 @@ const mobile = ref<string>(''); // 手机号
 const password = ref<string>(''); // 密码
 const code = ref<string>(''); // 验证码
 const agreeProtocol = ref<boolean>(false); // 是否同意协议
-const isPasswordLogin = ref<boolean>(false); // 是否密码登录
+const isPasswordLogin = ref<boolean>(true); // 是否密码登录
 
 const router = useRouter();
 const route = useRoute();
@@ -99,12 +103,16 @@ const onClickRightEvt = () => {
 const submitUserLogin = async () => {
   if (!agreeProtocol.value) return showToast('请勾选协议');
   
-  console.log('提交');
-  const { data: loginData } = await proxy.$api.userLoginByPasswordApi({ mobile: mobile.value, password: password.value });
-  console.log(loginData);
+  // 校验通过，进行登录/验证码登录
+  const { data: loginedData } = isPasswordLogin.value
+    ? await proxy.$api.userLoginByPasswordApi({ mobile: mobile.value, password: password.value })
+    : await proxy.$api.userLoginBySMSApi({ mobile: mobile.value, code: code.value });
+
+  // console.log(loginedData);
   // 设置个人信息数据
-  userStore.setUserAction(loginData);
+  userStore.setUserAction(loginedData);
   showSuccessToast('登录成功');
+  // 如果有回跳的页面就进进入首页
   router.replace(route.query.redirect as string || '/index');
 };
 </script>
