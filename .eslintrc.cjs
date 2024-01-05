@@ -36,6 +36,8 @@ module.exports = {
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
 
+    'no-multiple-empty-lines': ['error', { 'max': 1 }], // 空行最多不能超过 1 行
+
     // vue (https://eslint.vuejs.org/rules)
     'vue/singleline-html-element-content-newline': 'off', // 在单行元素的内容前后需要换行符
     'vue/require-default-prop': 'off', // 关闭 props 需要默认值
