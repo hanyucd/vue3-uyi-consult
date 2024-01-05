@@ -2,7 +2,10 @@
 
 技术栈：Vue3 + Typescript + Pinia + Vite + Vant + Postcss + Pnpm + Husky + Eslint + ~~Prettier~~
 
-其他：unplugin-vue-components（按需自动导入组件） + unplugin-auto-import（按需自动导入 API）
+其他：
+- pinia-plugin-persistedstate（适用于 Pinia 的持久化存储插件）
+- unplugin-vue-components（按需自动导入组件）
+- unplugin-auto-import（按需自动导入 API）
 
 ### 参考
 [eslint-plugin-vue中文文档](https://www.cnblogs.com/qq3279338858/p/16617032.html)

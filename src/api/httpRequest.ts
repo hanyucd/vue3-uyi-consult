@@ -18,8 +18,6 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     // console.log(config);
     const userStore = useUserStore();
 
-    console.log(userStore.userToken);
-
     // 请求头添加 token
     if (userStore.userToken) {
       config.headers['Authorization'] = `Bearer ${ userStore.userToken }`;
@@ -45,12 +43,11 @@ http.interceptors.response.use((res: AxiosResponse) => {
       return Promise.reject(resData);
     }
 
-    console.log(resData);
+    console.log(res);
 
     return resData;
   }, (error: AxiosError) => {
     // console.log(error);
-    console.log(router);
 
     // 处理401错误
     if (error.response?.status === 401) {
@@ -60,9 +57,10 @@ http.interceptors.response.use((res: AxiosResponse) => {
       // 跳转到登录页面，携带当前访问页面的地址（包含参数的）
       router.push({
         path: '/login',
-        query: { returnUrl: router.currentRoute.value.fullPath }
+        query: { redirect: router.currentRoute.value.fullPath }
       });
     }
+    
     return Promise.reject(error);
   },
 );
