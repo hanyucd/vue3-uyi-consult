@@ -28,7 +28,7 @@ export default defineConfig({
     eslintPlugin(),
     Components({
       dts: 'src/components.d.ts', // generate `components.d.ts` global declarations
-      resolvers: [VantResolver()],
+      resolvers: [VantResolver({ importStyle: false })],
     }),
   ],
 });

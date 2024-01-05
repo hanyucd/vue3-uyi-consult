@@ -1,6 +1,7 @@
 {
-  // 属性指定所要编译的文件列表
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  // 指定所要编译的文件列表
+  // "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
     // 指定编译出来的 JavaScript 代码的 ECMAScript 版本

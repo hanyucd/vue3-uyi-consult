@@ -1,28 +1,19 @@
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <van-button type="primary" @click="setUserClick">主要按钮</van-button>
+    <van-button type="primary" @click="getUserInfo">主要按钮</van-button>
+
+    <RouterView />
   </div>
-
-
-  <div class="div-test">容器</div>
-
-  <van-button type="primary" @click="setUserClick">主要按钮</van-button>
-  <van-button type="primary" @click="getUserInfo">主要按钮</van-button>
-
-  <RouterView />
 </template>
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores';
-import api from '@/api';
+import useProxyHook from '@/hooks/useProxyHook';
 const userStore = useUserStore();
+// console.log(userStore);
 
-console.log(userStore);
+const proxy = useProxyHook();
 
 const setUserClick = () => {
   userStore.setUserAction({
@@ -39,15 +30,11 @@ const setUserClick = () => {
 };
 
 const getUserInfo = () => {
-  api.fetchUserInfoApi().then(res => console.log(res));
+  // api.fetchUserInfoApi().then(res => console.log(res));
+  proxy.$api.fetchUserInfoApi();
 };
 
 </script>
 
 <style lang="scss" scoped>
-.div-test {
-  width: 200px;
-  height: 200px;
-  background: var(--cp-primary);
-}
 </style>

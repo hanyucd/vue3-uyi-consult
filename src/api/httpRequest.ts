@@ -1,7 +1,7 @@
 import axios from 'axios';
-import type { AxiosInstance, AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosError, InternalAxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import { useUserStore } from '@/stores';
-import { showDialog } from 'vant';
+import { showToast } from 'vant';
 import router from '@/router';
 
 const http: AxiosInstance = axios.create({
@@ -28,6 +28,7 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     return config;
   }, (error: AxiosError) => {
     console.log(error);
+    return Promise.reject(error);
   },
 );
 
@@ -40,19 +41,16 @@ http.interceptors.response.use((res: AxiosResponse) => {
     const resData = res.data;
     // 跟后台约定,响应成功,但是code不为10000,是业务失败(不同公司处理方案不一)
     if (resData.code !== 10000) {
-      showDialog({ message: resData.message, }).then(() => {
-        // 关闭弹窗的逻辑
-      });
-
-      return Promise.reject(resData.message);
+      showToast(resData.message || '业务失败');
+      return Promise.reject(resData);
     }
 
     console.log(resData);
 
     return resData;
   }, (error: AxiosError) => {
-    // console.log(router.currentRoute);
     // console.log(error);
+    console.log(router);
 
     // 处理401错误
     if (error.response?.status === 401) {
@@ -70,13 +68,13 @@ http.interceptors.response.use((res: AxiosResponse) => {
 );
 
 // 返回 res.data 的interface
-interface IResponse<T = unknown> {
+interface IResponse<T = any> {
   code: number | string;
   message: string;
   data: T | null
 }
 
-const httpRequest = <T = unknown>(url = '', data = {}, method = 'get', otherConfig = {}): Promise<IResponse<T>> => {
+const httpRequest = <T = any>(url = '', data = {}, method: Method = 'get', otherConfig = {}): Promise<IResponse<T>> => {
   return http.request({
     url,
     method: method.toLowerCase(),
