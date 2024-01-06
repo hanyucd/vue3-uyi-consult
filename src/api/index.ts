@@ -1,5 +1,5 @@
 import httpRequest from './httpRequest';
-import type { User } from '@/types/user';
+import type { User, UserInfo } from '@/types/user';
 
 export default {
   // 用户密码登录
@@ -9,5 +9,5 @@ export default {
   // 发送手机验证码
   sendMobileSMSApi: (param: object) => httpRequest(`/code`, param),
   // 拉取用户信息
-  fetchUserInfoApi: () => httpRequest<User>(`/patient/myUser`, {}),
+  fetchUserInfoApi: () => httpRequest<UserInfo>(`/patient/myUser`),
 };

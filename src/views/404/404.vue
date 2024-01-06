@@ -1,6 +1,6 @@
 <template>
   <div>
-    404
+    <van-empty description="开发ing..." />
   </div>
 </template>
 
