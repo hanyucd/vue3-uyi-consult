@@ -14,11 +14,11 @@
     <!-- 表单 -->
     <van-form ref="loginFormRef" autocomplete="off" @submit="submitUserLogin">
       <!-- 手机号 -->
-      <van-field v-model="mobile" :rules="mobileRules" name="mobile" placeholder="请输入手机号" type="tel" />
+      <van-field v-model="mobile" :rules="mobileRules" type="tel" name="mobile" placeholder="请输入手机号" />
       <!-- 密码 -->
-      <van-field v-if="isPasswordLogin" v-model="password" :rules="passwordRules" placeholder="请输入密码" type="password">
+      <van-field v-if="isPasswordLogin" v-model="password" :type="isLookPassword ? 'text' : 'password'" :rules="passwordRules" placeholder="请输入密码">
         <template #button>
-          密码
+          <SvgIcon :name="`login-eye-${ isLookPassword ? 'on' : 'off'}`" style="margin-right: 10px" @click="isLookPassword = !isLookPassword" />
         </template>
       </van-field>
       <!-- 验证码 -->
@@ -76,18 +76,16 @@ const password = ref<string>(''); // 密码
 const code = ref<string>(''); // 验证码
 const agreeProtocol = ref<boolean>(false); // 是否同意协议
 const isPasswordLogin = ref<boolean>(true); // 是否密码登录
+const isLookPassword = ref<boolean>(false); // 是否查看密码
 
 const router = useRouter();
 const route = useRoute();
 const proxy = useProxyHook();
 const userStore = useUserStore();
-const { smsTime, loginFormRef, sendSMScode } = useMobileHook(mobile);
-
-// 控制密码是否显示
-// let show = ref<boolean>(false);
+const { loginFormRef, smsTime, sendSMScode } = useMobileHook(mobile);
 
 onMounted(() => {
-  console.log(route);
+  // console.log(route);
 });
 
 // 组件卸载的时候需要清空定时器,防止内存泄漏

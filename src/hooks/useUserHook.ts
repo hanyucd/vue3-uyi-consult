@@ -35,7 +35,7 @@ export const useMobileHook = (mobile: Ref<string>, type: CodeType = 'login') => 
   };
 
   onUnmounted(() => {
-    clearInterval(timer);
+    window.clearInterval(timer);
   });
   
   return {

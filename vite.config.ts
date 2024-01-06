@@ -30,6 +30,7 @@ export default defineConfig({
     eslintPlugin(),
     Components({
       dts: 'src/components.d.ts', // generate `components.d.ts` global declarations
+      // vant 样式全局引入了，关闭自动按需引入
       resolvers: [VantResolver({ importStyle: false })],
     }),
     createSvgIconsPlugin({
