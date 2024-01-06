@@ -1,3 +1,4 @@
+import 'vue-router';
 import api from '@/api';
 
 export {};
@@ -8,5 +9,11 @@ declare module 'vue' {
     $api: {
       [prop in keyof api]: any;
     },
+  }
+}
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    title?: string
   }
 }

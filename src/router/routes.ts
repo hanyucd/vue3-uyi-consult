@@ -13,19 +13,19 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: tabbar,
     children: [
       { path: '/index', name: 'indexRoute', meta: { title: '首页' }, component: tabIndex },
-      { path: '/article', name: 'orderRoute', meta: { title: '健康百科' }, component: tabArticle },
-      { path: '/msg', name: 'orderRoute', meta: { title: '消息' }, component: tabMsg },
+      { path: '/article', name: 'articleRoute', meta: { title: '健康百科' }, component: tabArticle },
+      { path: '/msg', name: 'msgRoute', meta: { title: '消息' }, component: tabMsg },
       { path: '/profile', name: 'profileRoute', meta: { title: '个人中心' }, component: tabProfile },
     ],
   },
-  // 登录页面
+  // 登录
   {
     path: '/login',
     name: 'loginRoute',
     meta: { title: '登录' },
     component: () => import('@/views/login/login.vue'),
   },
-  // 404页面
+  // 404
   {
     path: '/:pathMatch(.*)*',
     name: '404Route',

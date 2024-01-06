@@ -53,10 +53,6 @@
         <img src="@/assets/qq.svg" alt="" />
       </div>
     </div>
-
-    <svg aria-hidden="true" class="cp-icon">
-      <use href="#icon-consult-alipay" />
-    </svg>
   </div>
 </template>
 

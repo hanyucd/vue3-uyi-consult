@@ -1,11 +1,35 @@
 <template>
-  <div>
+  <div class="layout-page">
     <router-view />
 
     <van-tabbar v-model="tabActive">
-      <van-tabbar-item name="indexRoute" icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item name="orderRoute" icon="bars">订单</van-tabbar-item>
-      <van-tabbar-item name="profileRoute" icon="contact">我的</van-tabbar-item>
+      <van-tabbar-item name="indexRoute">
+        <span>首页</span>
+        <template #icon="{ active }">
+          <SvgIcon :name="`home-index-${ active ? 'active' : 'default' }`" />
+        </template>
+      </van-tabbar-item>
+
+      <van-tabbar-item name="articleRoute">
+        <span>健康百科</span>
+        <template #icon="{ active }">
+          <SvgIcon :name="`home-article-${ active ? 'active' : 'default' }`" />
+        </template>
+      </van-tabbar-item>
+
+      <van-tabbar-item name="msgRoute">
+        <span>消息</span>
+        <template #icon="{ active }">
+          <SvgIcon :name="`home-notice-${ active ? 'active' : 'default' }`" />
+        </template>
+      </van-tabbar-item>
+
+      <van-tabbar-item name="profileRoute">
+        <span>我的</span>
+        <template #icon="{ active }">
+          <SvgIcon :name="`home-mine-${ active ? 'active' : 'default' }`" />
+        </template>
+      </van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -20,9 +44,10 @@ const tabActive = ref(route.name as string); // tab 激活
 // console.log(route.name);
 
 watch(tabActive, (newVal) => {
-  console.log(newVal);
   router.push({ name: newVal });
 });
 </script>
 
-<style scoped></style>
+<style lange="scss" scoped>
+@import './style.scss';
+</style>
