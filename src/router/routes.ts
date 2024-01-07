@@ -3,7 +3,7 @@ import tabbar from '@/views/tabbar/tabbar.vue';
 import tabIndex from '@/views/tabbar/tab-index/tab-index.vue';
 import tabArticle from '@/views/tabbar/tab-article/tab-article.vue';
 import tabMsg from '@/views/tabbar/tab-msg/tab-msg.vue';
-import tabProfile from '@/views/tabbar/tab-profile/tab-profile.vue';
+import tabProfile from '@/views/tabbar/tab-user/tab-user.vue';
 
 const constantRouterMap: RouteRecordRaw[] = [
   {
@@ -15,7 +15,7 @@ const constantRouterMap: RouteRecordRaw[] = [
       { path: '/index', name: 'indexRoute', meta: { title: '首页' }, component: tabIndex },
       { path: '/article', name: 'articleRoute', meta: { title: '健康百科' }, component: tabArticle },
       { path: '/msg', name: 'msgRoute', meta: { title: '消息' }, component: tabMsg },
-      { path: '/profile', name: 'profileRoute', meta: { title: '个人中心' }, component: tabProfile },
+      { path: '/user', name: 'userRoute', meta: { title: '个人中心' }, component: tabProfile },
     ],
   },
   // 登录
@@ -24,6 +24,12 @@ const constantRouterMap: RouteRecordRaw[] = [
     name: 'loginRoute',
     meta: { title: '登录' },
     component: () => import('@/views/login/login.vue'),
+  },
+  {
+    path: '/user/patient',
+    name: 'patientRoute',
+    meta: { title: '家庭档案' },
+    component: () => import('@/views/module-user/user-patient/user-patient.vue'),
   },
   // 404
   {

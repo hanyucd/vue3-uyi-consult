@@ -1,5 +1,5 @@
 import httpRequest from './httpRequest';
-import type { User, UserInfo } from '@/types/user';
+import type { User, UserInfo, PatientList, Patient } from '@/types/user';
 
 export default {
   // 用户密码登录
@@ -10,4 +10,6 @@ export default {
   sendMobileSMSApi: (param: object) => httpRequest(`/code`, param),
   // 拉取用户信息
   fetchUserInfoApi: () => httpRequest<UserInfo>(`/patient/myUser`),
+  // 获取患者列表
+  getPatientListApi: () => httpRequest<PatientList>(`/patient/mylist`),
 };
