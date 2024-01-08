@@ -12,7 +12,7 @@
           <span>{{ item.genderValue }}</span>
           <span>{{ item.age }}岁</span>
         </div>
-        <div class="icon">
+        <div class="icon" @click="openPatientPopup(item)">
           <SvgIcon name="user-edit" />
         </div>
         <div v-if="item.defaultFlag === 1" class="tag">默认</div>
@@ -28,9 +28,9 @@
 
     <!-- 患者 popup 组件 -->
     <van-popup v-model:show="isShowPatientPopup" position="right">
-      <NavBar title="添加患者" :back="() => isShowPatientPopup = false" />
+      <NavBar :title="patient.id ? '编辑患者' : '添加患者'" right-text="保存" :back="() => isShowPatientPopup = false" @clickRightEvt="onSavePatientEvt" />
 
-      <van-form ref="form" autocomplete="off">
+      <van-form ref="patientFormRef" autocomplete="off">
         <van-field v-model="patient.name" label="真实姓名" placeholder="请输入真实姓名" :rules="nameRules" />
         <van-field v-model="patient.idCard" label="身份证号" placeholder="请输入身份证号" :rules="idCardRules" />
         <van-field label="性别" class="pb4">
@@ -45,6 +45,10 @@
           </template>
         </van-field>
       </van-form>
+      <!-- 删除按钮 -->
+      <van-action-bar v-if="patient.id">
+        <van-action-bar-button text="删除" @click="deletePatient" />
+      </van-action-bar>
     </van-popup>
   </div>
 </template>
@@ -54,6 +58,7 @@ import { ref, computed, onMounted } from 'vue';
 import useProxyHook from '@/hooks/useProxyHook';
 import type { PatientList, Patient } from '@/types/user';
 import { nameRules, idCardRules } from '@/utils/ruleUtil';
+import { showConfirmDialog, showSuccessToast, showToast, type FormInstance } from 'vant';
 
 const proxy = useProxyHook();
 const patientArys = ref<PatientList>([]); // 患者列表
@@ -95,20 +100,65 @@ const _getPatientList = async () => {
   patientArys.value = patientData;
 };
 
+// 是否显示患者 popup
 const isShowPatientPopup = ref(false);
 
+/**
+ * 打开患者 popup
+ */
 const openPatientPopup = (item?: Patient) => {
-  console.log('打开');
-  
   // 修改患者
   if (item) {
-    console.log('修改');
+    const { id, gender, name, idCard, defaultFlag } = item;
+    patient.value = { id, gender, name, idCard, defaultFlag };
   // 新增患者
   } else {
+    patientFormRef.value?.resetValidation();
     patient.value = { ...initPatient };
   }
   
   isShowPatientPopup.value = true;
+};
+
+// 患者表单 实例
+const patientFormRef = ref<FormInstance>();
+/**
+ * 保存患者事件
+ */
+const onSavePatientEvt = async () => {
+  // 表单整体校验 validate 进行校验
+  await patientFormRef.value?.validate();
+  // 取出身份证倒数第二位，%2之后  1 男  0 女
+  const gender = +patient.value.idCard.slice(-2, -1) % 2;
+  if (gender !== patient.value.gender) {
+    await showConfirmDialog({ title: '温馨提示', message: '填写的性别和身份证上的不一致\n您确认提交吗？', showConfirmButton: false });
+  }
+
+  // 提交即可 编辑 或者 添加
+  patient.value.id
+    ? await proxy.$api.updatePatientInfoApi(patient.value)
+    : await proxy.$api.addPatientInfoApi(patient.value);
+
+  isShowPatientPopup.value = false;
+  _getPatientList();
+  showSuccessToast(patient.value.id ? '编辑成功' : '添加成功');
+};
+
+/**
+ * 删除患者
+ */
+const deletePatient = async () => {
+  if (patient.value.id) {
+    // 确认框，删除请求，关闭，加载，提示
+    await showConfirmDialog({
+      title: '温馨提示',
+      message: `您确认删除 ${ patient.value.name } 患者信息？`
+    });
+    await proxy.$api.delPatientApi(patient.value.id);
+    isShowPatientPopup.value = false;
+    _getPatientList();
+    showSuccessToast('删除成功');
+  }
 };
 </script>
 

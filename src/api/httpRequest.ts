@@ -43,8 +43,6 @@ http.interceptors.response.use((res: AxiosResponse) => {
       return Promise.reject(resData);
     }
 
-    console.log(res);
-
     return resData;
   }, (error: AxiosError) => {
     // console.log(error);

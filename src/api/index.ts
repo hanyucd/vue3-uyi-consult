@@ -12,4 +12,10 @@ export default {
   fetchUserInfoApi: () => httpRequest<UserInfo>(`/patient/myUser`),
   // 获取患者列表
   getPatientListApi: () => httpRequest<PatientList>(`/patient/mylist`),
+  // 添加患者信息
+  addPatientInfoApi: (param: object) => httpRequest(`/patient/add`, param, 'post'),
+  // 更新患者信息
+  updatePatientInfoApi: (param: object) => httpRequest(`/patient/update`, param, 'put'),
+  // 删除患者
+  delPatientApi: (patientId: string) => httpRequest(`/patient/del/${ patientId }`, {}, 'delete'),
 };
