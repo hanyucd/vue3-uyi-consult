@@ -25,6 +25,8 @@
 
       <div class="patient-tip">最多可添加 6 人</div>
     </div>
+
+    <RadioBtn v-model="patient.gender" :radio-options="radioOptions" />
   </div>
 </template>
 
@@ -35,6 +37,20 @@ import type { PatientList, Patient } from '@/types/user';
 
 const proxy = useProxyHook();
 const patientArys = ref<PatientList>([]); // 患者列表
+
+const radioOptions = [
+  { label: '男', value: 1 },
+  { label: '女', value: 0 }
+];
+
+const initPatient: Patient = {
+  name: '',
+  idCard: '',
+  gender: 1,
+  defaultFlag: 0
+};
+
+const patient = ref<Patient>({ ...initPatient });
 
 onMounted(() => {
   _getPatientList();
