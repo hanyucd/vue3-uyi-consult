@@ -12,6 +12,8 @@ const router = createRouter({
   routes: constantRouterMap
 });
 
+// 登录页面路由
+const loginRoutePath = '/login';
 // 白名单路由
 const whiteRouteList = ['/login', '/login/callback', '/register'];
 
@@ -27,7 +29,15 @@ router.beforeEach((to, from) => {
   NProgress.start();
   // 获取用户 token 的
   const userStore = useUserStore();
-  if (!userStore.userToken && !whiteRouteList.includes(to.path)) return { path: '/login' };
+  // if (!userStore.userToken && !whiteRouteList.includes(to.path)) return { path: '/login' };
+
+  if (userStore.userToken) {
+    // 防止重复登录
+    if (to.path === loginRoutePath) return '/';
+  } else {
+    // 无 token 情况下 并且不再白名单中 则进入登录页面
+    if (!whiteRouteList.includes(to.path)) return { path: '/login' };
+  }
 });
 
 /**

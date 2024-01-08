@@ -12,7 +12,7 @@ interface IProps {
   rightText?: string;
   back?: () => void
 }
-defineProps<IProps>();
+const props = defineProps<IProps>();
 
 const emit = defineEmits<{
   clickRightEvt: []
@@ -29,9 +29,8 @@ const onClickRightEvt = () => {
  * 点击左侧按钮
  */
 const onClickLeftEvt = () => {
-  console.log('点击');
-  console.log(history);
-
+  if (props.back) return props.back();
+  
   // 判断一下历史记录里可不可以回退
   if (history.state.back) {
     router.back();

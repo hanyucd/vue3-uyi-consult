@@ -7,7 +7,9 @@
       :class="{ active: modelValue === item.value }"
       href="javascript:;"
       @click="toggleItem(item.value)"
-    >{{ item.label }}</a>
+    >
+      {{ item.label }}
+    </a>
   </div>
 </template>
 
