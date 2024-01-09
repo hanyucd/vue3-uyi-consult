@@ -9,12 +9,12 @@ declare module 'vue' {
     $api: {
       [prop in keyof api]: any;
       // [prop in keyof api]: typeof api[prop];
-    },
+    };
   }
 }
 
 declare module 'vue-router' {
   interface RouteMeta {
-    title?: string
+    title?: string;
   }
 }

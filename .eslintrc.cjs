@@ -35,6 +35,16 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/semi': 'error', // 强制在语句末尾使用分号
+    // 接口和类型别名中的成员之间分隔符
+    '@typescript-eslint/member-delimiter-style': [
+      'error',
+      {
+        'multiline': { 'delimiter': 'semi', 'requireLast': true },
+        'singleline': { 'delimiter': 'semi', 'requireLast': false },
+        'multilineDetection': 'brackets'
+      }
+    ],
 
     'no-multiple-empty-lines': ['error', { 'max': 1 }], // 空行最多不能超过 1 行
 

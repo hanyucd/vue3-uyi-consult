@@ -1,15 +1,15 @@
 export type User = {
   // token
-  token: string
-  refreshToken: string
+  token: string;
+  refreshToken: string;
   // 头像
-  avatar: string
+  avatar: string;
   // 脱敏手机号
-  mobile: string
+  mobile: string;
   // 用户名
-  account: string
+  account: string;
   // 用户id
-  id: string
+  id: string;
 };
 
 // 验证码类型
@@ -24,42 +24,42 @@ type OmitUser = Omit<User, 'token' | 'refreshToken'>;
 
 export type UserInfo = OmitUser & {
   /** 关注 */
-  likeNumber: number
+  likeNumber: number;
   /** 收藏 */
-  collectionNumber: number
+  collectionNumber: number;
   /** 积分 */
-  score: number
+  score: number;
   /** 优惠券 */
-  couponNumber: number
+  couponNumber: number;
   orderInfo: {
     /** 待付款 */
-    paidNumber: number
+    paidNumber: number;
     /** 待发货 */
-    receivedNumber: number
+    receivedNumber: number;
     /** 待收货 */
-    shippedNumber: number
+    shippedNumber: number;
     /** 已完成 */
-    finishedNumber: number
-  }
-}
+    finishedNumber: number;
+  };
+};
 
 // 家庭档案-患者信息
 export type Patient = {
   /** 患者ID */
-  id?: string
+  id?: string;
   /** 患者名称 */
-  name: string
+  name: string;
   /** 身份证号 */
-  idCard: string
+  idCard: string;
   /** 0不默认  1默认 */
-  defaultFlag: 0 | 1
+  defaultFlag: 0 | 1;
   /** 0 女  1 男 */
-  gender: 0 | 1
+  gender: 0 | 1;
   /** 性别文字 */
-  genderValue?: string
+  genderValue?: string;
   /** 年龄 */
-  age?: number
-}
+  age?: number;
+};
 
 // 家庭档案-患者信息列表
 export type PatientList = Patient[];

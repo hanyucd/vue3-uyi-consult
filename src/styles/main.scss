@@ -1,6 +1,5 @@
 // :root 表示 <html> 元素
 :root {
-  // --cp-primary: #16C2A3;
   --cp-primary: #16BAA9; // 这样设置方便全局更改方主题色
   --cp-plain: #EAF8F6;
   --cp-orange: #FCA21C;
@@ -41,4 +40,18 @@ h1,h2,h3,h4,h5,h6,p,ul,ol {
 
 #nprogress .bar {
   background-color: var(--cp-primary) !important;
+}
+
+// 全局覆盖van-tab样式
+.van-tabs {
+  .van-tabs__nav {
+    padding: 0 0 15px 0;
+  }
+  .van-tabs__line {
+    width: 20px;
+    background-color: var(--cp-primary);
+  }
+  .van-tab {
+    padding: 0 15px;
+  }
 }

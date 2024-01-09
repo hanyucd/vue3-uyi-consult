@@ -1,0 +1,78 @@
+.knowledge-card {
+  padding: 20px 0 16px;
+  .head {
+    display: flex;
+    align-items: center;
+    .avatar {
+      width: 38px;
+      height: 38px;
+      margin-right: 10px;
+    }
+    .info {
+      width: 200px;
+      padding-right: 10px;
+      .name {
+        color: var(--cp-text2);
+      }
+      .dep {
+        color: var(--cp-tip);
+        font-size: 12px;
+      }
+    }
+    .btn {
+      padding: 0 12px;
+      border-color: var(--cp-primary);
+      color: var(--cp-primary);
+      height: 28px;
+      width: 72px;
+    }
+  }
+  .body {
+    .title {
+      font-size: 16px;
+      margin-top: 8px;
+      font-weight: normal;
+    }
+    .tag {
+      margin-top: 6px;
+      > span {
+        color: var(--cp-primary);
+        margin-right: 20px;
+        font-size: 12px;
+      }
+    }
+    .intro {
+      margin-top: 7px;
+      line-height: 2;
+      color: var(--cp-text3);
+    }
+    .imgs {
+      margin-top: 7px;
+      display: flex;
+      .van-image {
+        width: 106px;
+        height: 106px;
+        margin-right: 12px;
+        border-radius: 12px;
+        overflow: hidden;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      &.large {
+        .van-image {
+          width: 185px;
+          height: 125px;
+        }
+      }
+    }
+    .logs {
+      margin-top: 10px;
+      > span {
+        color: var(--cp-tip);
+        margin-right: 16px;
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 
 <template>
-  <div>消息</div>
+  <van-empty description="消息, 开发ing..." />
 </template>
 
 <script setup lang="ts"></script>

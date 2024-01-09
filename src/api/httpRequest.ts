@@ -67,7 +67,7 @@ http.interceptors.response.use((res: AxiosResponse) => {
 interface IResponse<T = any> {
   code: number | string;
   message: string;
-  data: T | null
+  data: T | null;
 }
 
 const httpRequest = <T = any>(url = '', data = {}, method: Method = 'get', otherConfig = {}): Promise<IResponse<T>> => {

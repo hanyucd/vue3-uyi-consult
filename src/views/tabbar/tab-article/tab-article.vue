@@ -1,5 +1,7 @@
 <template>
-  <div>订单</div>
+  <div>
+    <van-empty description="健康百科, 开发ing..." />
+  </div>
 </template>
 
 <script setup lang="ts"></script>
