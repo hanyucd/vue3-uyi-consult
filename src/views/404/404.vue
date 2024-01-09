@@ -8,6 +8,6 @@
 
 </script>
 
-<style scoped>
-
+<style lange="scss" scoped>
+@import './style.scss';
 </style>

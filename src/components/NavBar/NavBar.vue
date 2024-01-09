@@ -10,12 +10,12 @@ const router = useRouter();
 interface IProps {
   title?: string;
   rightText?: string;
-  back?: () => void
+  back?: () => void;
 }
 const props = defineProps<IProps>();
 
 const emit = defineEmits<{
-  clickRightEvt: []
+  clickRightEvt: [];
 }>();
 
 /**
