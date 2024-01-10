@@ -1,0 +1,19 @@
+.follow-doctor {
+  background-color: var(--cp-bg);
+  height: 250px;
+  .head {
+    display: flex;
+    justify-content: space-between;
+    height: 45px;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 13px;
+    > a {
+      color: var(--cp-tip);
+    }
+  }
+  .body {
+    width: 100%;
+    overflow: hidden;
+  }
+}

@@ -48,8 +48,10 @@ const tabActive = ref(route.name as string); // tab 激活
 // console.log(route.name);
 
 watch(tabActive, (newVal) => {
+  // console.log(newVal);
   router.push({ name: newVal });
-});
+},{ immediate: true });
+
 </script>
 
 <style lange="scss" scoped>
