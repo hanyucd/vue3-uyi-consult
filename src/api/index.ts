@@ -20,4 +20,6 @@ export default {
   delPatientApi: (patientId: string) => httpRequest(`/patient/del/${ patientId }`, {}, 'delete'),
   // 获取文章列表
   getKnowledgeListApi: (param: object) => httpRequest(`/patient/home/knowledge`, param),
+  // 获取推荐医生列表
+  getRecommendDoctorListApi: (param: object) => httpRequest(`/home/page/doc`, param),
 };
