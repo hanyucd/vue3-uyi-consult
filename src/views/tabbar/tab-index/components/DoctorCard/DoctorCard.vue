@@ -4,19 +4,20 @@
     <p class="name">{{ doctor.name }}</p>
     <p class="van-ellipsis">{{ doctor.hospitalName }} {{ doctor.depName }}</p>
     <p>{{ doctor.positionalTitles }}</p>
-    <van-button round size="small" type="primary">
-      <!-- :loading="loading" -->
-      <!-- @click="follow(doctor)" -->
+    <van-button round size="small" type="primary" :loading="loading" @click="follow(doctor)">
       {{ doctor.likeFlag === 1 ? '已关注' : '+ 关注' }}
     </van-button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useFollow } from '@/hooks/useUserHook';
 import type { Doctor } from '@/types/consult';
 defineProps<{
   doctor: Doctor;
 }>();
+
+const { loading, follow } = useFollow();
 </script>
 
 <style lange="scss">

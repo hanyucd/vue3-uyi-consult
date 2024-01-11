@@ -3,6 +3,7 @@ import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { showImagePreview, showSuccessToast, showFailToast, type FormInstance } from 'vant';
 import type { CodeType } from '@/types/user';
+import type { FollowType, ConsultOrderItem } from '@/types/consult';
 import api from '@/api';
 
 // 命名规范 useXxx  表示使用某功能
@@ -43,4 +44,22 @@ export const useMobileHook = (mobile: Ref<string>, type: CodeType = 'login') => 
     smsTime,
     sendSMScode
   };
+};
+
+/**
+ * 关注
+ */
+export const useFollow = (type: FollowType = 'doc') => {
+  const loading = ref(false);
+
+  const follow = async (obj: { id: string; likeFlag: 0 | 1 }) => {
+    try {
+      await api.followOrUnfollowApi({ id: obj.id, type });
+      obj.likeFlag = obj.likeFlag === 1 ? 0 : 1;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return { loading, follow };
 };

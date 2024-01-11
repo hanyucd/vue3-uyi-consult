@@ -22,4 +22,6 @@ export default {
   getKnowledgeListApi: (param: object) => httpRequest(`/patient/home/knowledge`, param),
   // 获取推荐医生列表
   getRecommendDoctorListApi: (param: object) => httpRequest(`/home/page/doc`, param),
+  // 关注/取关
+  followOrUnfollowApi: (param: object) => httpRequest(`/like`, param, 'post'),
 };
