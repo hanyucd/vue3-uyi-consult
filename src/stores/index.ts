@@ -12,4 +12,4 @@ export default pinia;
 // export { useUserStore }
 // 相当于下面
 export * from './modules/userModule';
-// export * from './modules/consult';
+export * from './modules/consultModule';
