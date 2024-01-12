@@ -1,5 +1,5 @@
 // 问诊类型
-export enum ConsultType {
+export enum ConsultTypeEnum {
   /** 找医生 */
   Doctor = 1,
   /** 快速问诊 */

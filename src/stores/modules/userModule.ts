@@ -6,7 +6,6 @@ export const useUserStore = defineStore('userModule', {
   persist: {
     key: 'user_info'
   },
-
   state: () => ({
     user: {} as User | {}
   }),

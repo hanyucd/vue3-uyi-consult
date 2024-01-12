@@ -22,8 +22,7 @@
         </van-col>
 
         <van-col span="8">
-          <router-link to="/consult/fast" class="nav">
-            <!-- @click="store.setType(ConsultType.Fast)" -->
+          <router-link to="/consult/fast" class="nav" @click="consultStore.setConsultTypeAction(ConsultTypeEnum.Fast)">
             <SvgIcon name="home-graphic" />
             <p class="title">极速问诊</p>
             <p class="desc">20s医生极速回复</p>
@@ -105,9 +104,13 @@
 import KnowledgeList from './components/KnowledgeList/KnowledgeList.vue';
 import RecommendDoctor from './components/RecommendDoctor/RecommendDoctor.vue';
 import { ref } from 'vue';
+import { useConsultStore } from '@/stores';
+import { ConsultTypeEnum } from '@/enums';
 
+const consultStore = useConsultStore();
 // active 的值是 tab 的索引
 const active = ref(0);
+
 </script>
 
 <style lange="scss">
