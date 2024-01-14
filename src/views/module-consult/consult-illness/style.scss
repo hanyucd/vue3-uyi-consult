@@ -52,43 +52,6 @@
     }
   }
 }
-.illness-img {
-  padding-top: 16px;
-  margin-bottom: 40px;
-  display: flex;
-  align-items: center;
-  .tip {
-    font-size: 12px;
-    color: var(--cp-tip);
-  }
-  ::v-deep() {
-    .van-uploader {
-      &__preview {
-        &-delete {
-          left: -6px;
-          top: -6px;
-          border-radius: 50%;
-          background-color: var(--cp-primary);
-          width: 20px;
-          height: 20px;
-          &-icon {
-            transform: scale(0.9) translate(-22%, 22%);
-          }
-        }
-        &-image {
-          border-radius: 8px;
-          overflow: hidden;
-        }
-      }
-      &__upload {
-        border-radius: 8px;
-      }
-      &__upload-icon {
-        color: var(--cp-text3);
-      }
-    }
-  }
-}
 .van-button {
   font-size: 16px;
   margin-bottom: 30px;

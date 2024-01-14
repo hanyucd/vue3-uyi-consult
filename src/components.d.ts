@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./components/SvgIcon/HelloWorld.vue')['default']
+    ImgUpload: typeof import('./components/ImgUpload/ImgUpload.vue')['default']
     NavBar: typeof import('./components/NavBar/NavBar.vue')['default']
     RadioBtn: typeof import('./components/RadioBtn/RadioBtn.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -38,5 +39,6 @@ declare module 'vue' {
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
     VanTabs: typeof import('vant/es')['Tabs']
+    VanUploader: typeof import('vant/es')['Uploader']
   }
 }

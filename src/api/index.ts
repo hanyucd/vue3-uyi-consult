@@ -25,5 +25,7 @@ export default {
   // 关注/取关
   followOrUnfollowApi: (param: object) => httpRequest(`/like`, param, 'post'),
   // 获取全部科室的接口
-  getAllDepApi: () => httpRequest('/dep/all')
+  getAllDepApi: () => httpRequest('/dep/all'),
+  // 获取全部科室的接口
+  uploadImageApi: (formData: object) => httpRequest('/upload', formData, 'post', { headers: { 'Content-Type': 'multipart/form-data' }})
 };

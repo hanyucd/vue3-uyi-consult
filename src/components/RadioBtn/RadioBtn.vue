@@ -15,8 +15,8 @@
 
 <script setup lang="ts">
 interface IProps {
-  radioOptions: Array<{ label: string; value: string | number}>;
-  modelValue: string | number;
+  radioOptions: Array<{ label: string; value: string | number }>;
+  modelValue: string | number | undefined;
 }
 
 defineProps<IProps>();
