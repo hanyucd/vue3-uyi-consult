@@ -28,10 +28,7 @@
         <radioBtn v-model="form.consultFlag" :radio-options="flagOptions" />
       </div>
       <div class="item">
-        <ImgUpload
-          @uploadSucEvt="onUploadSucEvt"
-          @deleteSucEvt="onDeleteSuccess"
-        />
+        <ImgUpload ref="imageUpdateRef" @uploadSucEvt="onUploadSucEvt" @deleteSucEvt="onDeleteSuccess" />
       </div>
       
       <!-- 下一步 -->
@@ -41,14 +38,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useConsultStore } from '@/stores';
 import type { ConsultIllness } from '@/types/consult';
 import { flagOptions, timeOptions } from '@/consts';
 import type { Image } from '@/types/consult';
+import { showConfirmDialog, showToast } from 'vant';
 import type { UploaderFileListItem } from 'vant/lib/uploader/types';
+import ImgUpload from '@/components/ImgUpload/ImgUpload.vue';
 
+const router = useRouter();
 const consultStore = useConsultStore();
+
 // 病情描述 表单
 const form = ref<ConsultIllness>({
   illnessDesc: '',
@@ -59,6 +61,26 @@ const form = ref<ConsultIllness>({
 
 // 是否禁止下一步
 const disabled = computed(() => !form.value.illnessDesc || form.value.illnessTime === undefined || form.value.consultFlag === undefined);
+
+// 患者表单 实例
+const imageUpdateRef = ref<InstanceType<typeof ImgUpload> | null>(null);
+
+onMounted(() => {
+  if (consultStore.consult.illnessDesc) {
+    showConfirmDialog({
+      title: '温馨提示',
+      message: '是否恢复您之前填写的病情信息呢?',
+      confirmButtonColor: 'var(--cp-primary)',
+      closeOnPopstate: false
+    }).then(() => {
+      // 点击确认
+      const { illnessDesc, illnessTime, consultFlag, pictures } = consultStore.consult;
+      form.value = { illnessDesc, illnessTime, consultFlag, pictures };
+      // 图片如果传了,也得回显
+      imageUpdateRef.value?.setFileList(pictures || []);
+    });
+  }
+});
 
 /**
  * 监听 上传图片成功 事件
@@ -78,7 +100,14 @@ const onDeleteSuccess = (image: UploaderFileListItem) => {
  * 下一步
  */
 const nextStep = () => {
-  
+  if (!form.value.illnessDesc) return showToast('请输入病情描述');
+  if (form.value.illnessTime === undefined) return showToast('请选择症状的持续时间');
+  if (form.value.consultFlag === undefined) return showToast('请选择是否就诊过');
+
+  // 数据存到store
+  consultStore.setIllnessAction(form.value);
+  // 跳转，携带标识
+  router.push('/user/patient?isChange=1');
 };
 </script>
 

@@ -58,6 +58,14 @@ const onAfterRead: UploaderAfterRead = (item) => {
 const onDeleteImg = (item: UploaderFileListItem) => {
   emit('deleteSucEvt', item);
 };
+
+const setFileList = (val: Image[]) => {
+  fileList.value = val;
+};
+
+defineExpose({
+  setFileList
+});
 </script>
 
 <style lang="scss" scoped>
