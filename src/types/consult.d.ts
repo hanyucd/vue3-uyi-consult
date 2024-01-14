@@ -134,8 +134,8 @@ export type Consult = {
   couponId: string;
 };
 
-// Partial<T> 把一个对象的属性转换成可选 
 // Required<T> 把一个对象的属性转换成必选
+// Partial<T> 把一个对象的属性转换成可选 
 type PartialConsult = Partial<Consult>;
 
 // 科室
@@ -152,3 +152,6 @@ export type TopDep = SubDep & {
   /** 二级科室数组 */
   child: SubDep[];
 };
+
+// 病情描述对象
+export type ConsultIllness = Pick<PartialConsult, 'illnessDesc' | 'illnessTime' | 'consultFlag' | 'pictures'>;
