@@ -66,6 +66,7 @@ const disabled = computed(() => !form.value.illnessDesc || form.value.illnessTim
 const imageUpdateRef = ref<InstanceType<typeof ImgUpload> | null>(null);
 
 onMounted(() => {
+  // 数据的回显
   if (consultStore.consult.illnessDesc) {
     showConfirmDialog({
       title: '温馨提示',
