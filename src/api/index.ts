@@ -24,4 +24,6 @@ export default {
   getRecommendDoctorListApi: (param: object) => httpRequest(`/home/page/doc`, param),
   // 关注/取关
   followOrUnfollowApi: (param: object) => httpRequest(`/like`, param, 'post'),
+  // 获取全部科室的接口
+  getAllDepApi: () => httpRequest('/dep/all')
 };

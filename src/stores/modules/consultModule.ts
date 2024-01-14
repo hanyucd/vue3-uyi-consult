@@ -12,11 +12,15 @@ export const useConsultStore = defineStore('consultModule', () => {
 
   // 设置问诊记录类型
   const setIllnessTypeAction = (_type: 0 | 1) => consult.value.illnessType = _type;
+
+  // 设置问诊记录类型
+  const setConsultDepAction = (_depId: string) => consult.value.depId = _depId;
   
   return {
     consult,
     setConsultTypeAction,
-    setIllnessTypeAction
+    setIllnessTypeAction,
+    setConsultDepAction
   };
 }, {
   persist: {

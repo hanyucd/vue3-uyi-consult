@@ -33,9 +33,15 @@ const constantRouterMap: RouteRecordRaw[] = [
   },
   {
     path: '/consult/fast',
-    name: 'fastConsultRoute',
+    name: 'consultFastRoute',
     meta: { title: '极速问诊' },
     component: () => import('@/views/module-consult/consult-fast/consult-fast.vue'),
+  },
+  {
+    path: '/consult/dep',
+    name: 'consultDepRoute',
+    meta: { title: '极速问诊' },
+    component: () => import('@/views/module-consult/consult-dep/consult-dep.vue'),
   },
   // 404
   {
