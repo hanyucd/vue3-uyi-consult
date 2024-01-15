@@ -23,13 +23,17 @@ export const useConsultStore = defineStore('consultModule', () => {
     consult.value.consultFlag = illness.consultFlag;
     consult.value.pictures = illness.pictures;
   };
+
+  // 设置患者
+  const setPatientAction = (_patientId: string) => (consult.value.patientId = _patientId);
   
   return {
     consult,
     setConsultTypeAction,
     setIllnessTypeAction,
     setConsultDepAction,
-    setIllnessAction
+    setIllnessAction,
+    setPatientAction,
   };
 }, {
   persist: {

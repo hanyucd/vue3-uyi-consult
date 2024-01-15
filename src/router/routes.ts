@@ -49,6 +49,12 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: () => import('@/views/module-consult/consult-illness/consult-illness.vue'),
     meta: { title: '病情描述' }
   },
+  {
+    path: '/consult/pay',
+    name: 'consultPayRoute',
+    component: () => import('@/views/module-consult/consult-pay/consult-pay.vue'),
+    meta: { title: '问诊支付' }
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',

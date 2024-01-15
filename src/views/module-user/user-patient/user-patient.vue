@@ -1,9 +1,15 @@
 <template>
-  <NavBar title="家庭档案" />
+  <NavBar :title="isChange ? '选择患者' : '家庭档案'" />
 
   <div class="patient-page">
+    <!-- 头部提示 -->
+    <div v-if="isChange" class="patient-change">
+      <h3>请选择患者信息</h3>
+      <p>以便医生给出更准确的治疗，信息仅医生可见</p>
+    </div>
+    
     <div class="patient-list">
-      <div v-for="item in patientArys" :key="item.id" class="patient-item">
+      <div v-for="item in patientArys" :key="item.id" class="patient-item" :class="{ selected: patientId === item.id }" @click="selectPatient(item)">
         <div class="info">
           <span class="name">{{ item.name }}</span>
           <span class="id">
@@ -12,7 +18,7 @@
           <span>{{ item.genderValue }}</span>
           <span>{{ item.age }}岁</span>
         </div>
-        <div class="icon" @click="openPatientPopup(item)">
+        <div class="icon" @click.stop="openPatientPopup(item)">
           <SvgIcon name="user-edit" />
         </div>
         <div v-if="item.defaultFlag === 1" class="tag">默认</div>
@@ -24,6 +30,11 @@
       </div>
 
       <div class="patient-tip">最多可添加 6 人</div>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div v-if="isChange" class="patient-next">
+      <van-button type="primary" round block @click="nextStep">下一步</van-button>
     </div>
 
     <!-- 患者 popup 组件 -->
@@ -55,11 +66,16 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useConsultStore } from '@/stores';
 import useProxyHook from '@/hooks/useProxyHook';
 import type { PatientList, Patient } from '@/types/user';
 import { nameRules, idCardRules } from '@/utils/ruleUtil';
 import { showConfirmDialog, showSuccessToast, showToast, type FormInstance } from 'vant';
 
+const route = useRoute();
+const router = useRouter();
+const consultStore = useConsultStore();
 const proxy = useProxyHook();
 const patientArys = ref<PatientList>([]); // 患者列表
 
@@ -98,6 +114,13 @@ onMounted(() => {
 const _getPatientList = async () => {
   const { data: patientData } = await proxy.$api.getPatientListApi();
   patientArys.value = patientData;
+
+  // 如果是选择患者页面 并且有患者信息 需要设置默认选中病人
+  if (isChange.value && patientArys.value.length) {
+    const defPatient = patientArys.value.find(item => item.defaultFlag === 1);
+    // 选中规则 有默认选中默认的, 没有默认的选中数组第一个
+    patientId.value = defPatient ? defPatient.id! : patientArys.value[0].id!;
+  }
 };
 
 // 是否显示患者 popup
@@ -122,6 +145,7 @@ const openPatientPopup = (item?: Patient) => {
 
 // 患者表单 实例
 const patientFormRef = ref<FormInstance>();
+
 /**
  * 保存患者事件
  */
@@ -159,6 +183,27 @@ const deletePatient = async () => {
     _getPatientList();
     showSuccessToast('删除成功');
   }
+};
+
+// isChange如果为true  那么就是选择患者页面
+const isChange = computed(() => route.query.isChange === '1');
+
+// 选择效果
+const patientId = ref('');
+
+/**
+ * 选择患者
+ */
+const selectPatient = (item: Patient) => {
+  if (!isChange.value) return;
+  patientId.value = item.id!;
+};
+
+// 选择患者 下一步
+const nextStep = () => {
+  if (!patientId.value) return showToast('请选择患者');
+  consultStore.setPatientAction(patientId.value);
+  router.push('/consult/pay');
 };
 </script>
 
