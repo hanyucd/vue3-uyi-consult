@@ -132,6 +132,18 @@ export type Consult = {
   patientId: string;
   /** 优惠券ID */
   couponId: string;
+  /** 肝功能 */
+  liverFunction: LiverFunction;
+  /** 肾功能 */
+  renalFunction: RenalFunction;
+  /** 过敏史 */
+  allergicHistory: AllergicHistory;
+  /** 生育状态及计划 */
+  fertilityStatus: FertilityStatus;
+  /** 药品 */
+  medicines: Medical[];
+  /** 医生Id */
+  docId: string;
 };
 
 // Required<T> 把一个对象的属性转换成必选
@@ -155,3 +167,20 @@ export type TopDep = SubDep & {
 
 // 病情描述对象
 export type ConsultIllness = Pick<PartialConsult, 'illnessDesc' | 'illnessTime' | 'consultFlag' | 'pictures'>;
+
+// 问诊订单预支付传参
+export type ConsultOrderPreParams = Pick<PartialConsult, 'type' | 'illnessType' | 'docId'>;
+
+// 问诊订单预支付信息
+export type ConsultOrderPreData = {
+  /** 积分抵扣 */
+  pointDeduction: number;
+  /** 优惠券抵扣 */
+  couponDeduction: number;
+  /** 优惠券ID */
+  couponId: string;
+  /** 需付款 */
+  payment: number;
+  /** 实付款 */
+  actualPayment: number;
+};
