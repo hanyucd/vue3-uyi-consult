@@ -34,3 +34,5 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 ```bash
 - postcss-px-to-viewport
 ```
+
+-第三方支付解决方案（支付宝）

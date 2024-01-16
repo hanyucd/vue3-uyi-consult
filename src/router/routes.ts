@@ -62,8 +62,6 @@ const constantRouterMap: RouteRecordRaw[] = [
     meta: { title: '问诊室' },
     // 路由独享的守卫
     beforeEnter(to) {
-      console.log(to);
-      
       if (to.query.payResult === 'false') return '/user/consult';
     }
   },
