@@ -26,6 +26,12 @@ export const useConsultStore = defineStore('consultModule', () => {
 
   // 设置患者
   const setPatientAction = (_patientId: string) => (consult.value.patientId = _patientId);
+
+  // 设置优惠券
+  const setCouponAction = (_couponId: string) => (consult.value.couponId = _couponId);
+
+  // 清空记录
+  const clearConsultAction = () => (consult.value = {});
   
   return {
     consult,
@@ -34,6 +40,8 @@ export const useConsultStore = defineStore('consultModule', () => {
     setConsultDepAction,
     setIllnessAction,
     setPatientAction,
+    setCouponAction,
+    clearConsultAction,
   };
 }, {
   persist: {

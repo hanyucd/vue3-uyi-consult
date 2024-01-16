@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./components/SvgIcon/HelloWorld.vue')['default']
     ImgUpload: typeof import('./components/ImgUpload/ImgUpload.vue')['default']
     NavBar: typeof import('./components/NavBar/NavBar.vue')['default']
     RadioBtn: typeof import('./components/RadioBtn/RadioBtn.vue')['default']
@@ -19,6 +18,7 @@ declare module 'vue' {
     VanBadge: typeof import('vant/es')['Badge']
     VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
+    VanCellGroup: typeof import('vant/es')['CellGroup']
     VanCheckbox: typeof import('vant/es')['Checkbox']
     VanCol: typeof import('vant/es')['Col']
     VanDivider: typeof import('vant/es')['Divider']
@@ -33,6 +33,8 @@ declare module 'vue' {
     VanRow: typeof import('vant/es')['Row']
     VanSidebar: typeof import('vant/es')['Sidebar']
     VanSidebarItem: typeof import('vant/es')['SidebarItem']
+    VanSkeleton: typeof import('vant/es')['Skeleton']
+    VanSubmitBar: typeof import('vant/es')['SubmitBar']
     VanSwipe: typeof import('vant/es')['Swipe']
     VanSwipeItem: typeof import('vant/es')['SwipeItem']
     VanTab: typeof import('vant/es')['Tab']
