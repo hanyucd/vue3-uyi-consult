@@ -67,8 +67,11 @@ import { showToast, showSuccessToast } from 'vant';
 
 // 手机号 13230000001 - 13230000100
 // 密码 abc12345
-const mobile = ref<string>(''); // 手机号
-const password = ref<string>(''); // 密码
+// const mobile = ref<string>(''); // 手机号
+// const password = ref<string>(''); // 密码
+const mobile = ref('13230000001');
+const password = ref('abc12345');
+
 const code = ref<string>(''); // 验证码
 const agreeProtocol = ref<boolean>(false); // 是否同意协议
 const isPasswordLogin = ref<boolean>(true); // 是否密码登录

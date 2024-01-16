@@ -55,6 +55,18 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: () => import('@/views/module-consult/consult-pay/consult-pay.vue'),
     meta: { title: '问诊支付' }
   },
+  {
+    path: '/room',
+    name: 'consultRoomRoute',
+    component: () => import('@/views/module-consult/consult-room/consult-room.vue'),
+    meta: { title: '问诊室' },
+    // 路由独享的守卫
+    beforeEnter(to) {
+      console.log(to);
+      
+      if (to.query.payResult === 'false') return '/user/consult';
+    }
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',

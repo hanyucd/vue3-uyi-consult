@@ -35,7 +35,7 @@
       :price="payOrderInfo.actualPayment * 100"
       button-text="立即支付"
       text-align="left"
-      :loading="loading"
+      :loading="submitBarLoading"
       @click="submitOrder"
     />
   </div>
@@ -44,21 +44,49 @@
     <!-- 骨架组件 -->
     <van-skeleton title :row="10" style="margin-top: 18px" />
   </div>
+
+  <!-- 支付面板 -->
+  <PayActionSheet v-model:show="paySheetShow" :order-id="consultOrderId" :actual-payment="payOrderInfo.actualPayment" :on-close="onPayActionSheetClose" pay-callback="/room" />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import type { ConsultOrderPreData } from '@/types/consult';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
+import type { ConsultOrderPreData, ConsultOrderPreParams, PartialConsult } from '@/types/consult';
 import type { Patient } from '@/types/user';
 import useProxyHook from '@/hooks/useProxyHook';
 import { useConsultStore } from '@/stores';
+import { showConfirmDialog, showDialog, showToast } from 'vant';
 
+const router = useRouter();
 const consultStore = useConsultStore();
 const proxy = useProxyHook();
+// 从对象类型中取出联合类型 key 值
+type ConsultKey = keyof PartialConsult;
 
 onMounted(() => {
+  const validKeys: ConsultKey[] = [ 'type', 'illnessType', 'depId', 'illnessDesc', 'illnessTime', 'consultFlag', 'patientId', ];
+
+  const valid = validKeys.every((key) => consultStore.consult[key] !== undefined);
+  if (!valid) {
+    return showDialog({
+      title: '温馨提示',
+      message: '问诊信息不完整请重新填写，如有未支付的问诊订单可在问诊记录中继续支付！',
+      closeOnPopstate: false
+    }).then(() => {
+      router.push('/');
+    });
+  }
+
   _getConsultOrderPre();
   _getPatientDetail();
+});
+
+onBeforeRouteLeave(() => {
+  if (consultOrderId.value) {
+    showToast('你已生成问诊订单');
+    return false;
+  }
 });
 
 // 预支付信息
@@ -68,7 +96,7 @@ const payOrderInfo = ref<ConsultOrderPreData>({} as ConsultOrderPreData);
  * 获取预支付订单信息
  */
 const _getConsultOrderPre = async () => {
-  const param = { type: consultStore.consult.type, illnessType: consultStore.consult.illnessType };
+  const param: ConsultOrderPreParams = { type: consultStore.consult.type, illnessType: consultStore.consult.illnessType };
   const { data: payOrderPreData } = await proxy.$api.getConsultOrderPreApi(param);
 
   payOrderInfo.value = payOrderPreData;
@@ -90,14 +118,50 @@ const _getPatientDetail = async () => {
 
 // 是否同意协议
 const agree = ref(false);
-
 // 支付功能 点击支付,创建订单id,打开支付抽屉
-const loading = ref(false);
+const submitBarLoading = ref(false);
+// 是否显示支付面板
+const paySheetShow = ref(false);
+// 问诊订单 id
+const consultOrderId = ref('');
 /**
  * 提交支付订单
  */
-const submitOrder = () => {
-  
+const submitOrder = async () => {
+  if (!agree.value) return showToast('请勾选我同意支付协议');
+  submitBarLoading.value = true;
+
+  const consultParam = consultStore.consult;
+  const { data: orderData } = await proxy.$api.createConsultOrderApi(consultParam);
+  consultOrderId.value = orderData.id;
+  submitBarLoading.value = false;
+
+  // 创建了订单id 之后, 把仓库数据清空一下,防止多次生成同样内容的订单
+  consultStore.clearConsultAction();
+  paySheetShow.value = true;
+};
+
+/**
+ * 监听 支付面板 关闭事件
+ */
+const onPayActionSheetClose = () => {
+  console.log('父组件关闭面板');
+  // return true;
+
+  return showConfirmDialog({
+    title: '关闭支付',
+    message: '取消支付将无法获得医生回复,医生接诊名额有限,是否确认关闭?',
+    cancelButtonText: '仍要关闭',
+    confirmButtonText: '继续支付',
+    confirmButtonColor: 'var(--cp-primary)'
+  }).then(() => {
+    return false;
+  }).catch(() => {
+    // 点取消就跳转到订单页
+    consultOrderId.value = '';
+    router.push('/user/consult');
+    return true;
+  });
 };
 </script>
 

@@ -32,4 +32,8 @@ export default {
   uploadImageApi: (formData: object) => httpRequest('/upload', formData, 'post', { headers: { 'Content-Type': 'multipart/form-data' }}),
   // 获取问诊订单预支付
   getConsultOrderPreApi: (param: object) => httpRequest('/patient/consult/order/pre', param),
+  // 生成订单
+  createConsultOrderApi: (param: object) => httpRequest(`/patient/consult/order`, param, 'post'),
+  // 获取支付地址  0 是微信  1 支付宝
+  getConsultOrderPayUrlApi: (param: { paymentMethod: 0 | 1; orderId: string; payCallback: string }) => httpRequest(`/patient/consult/pay`, param, 'post'),
 };
