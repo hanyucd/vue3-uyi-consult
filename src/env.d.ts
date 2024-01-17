@@ -7,8 +7,8 @@ export {};
 declare module 'vue' {
   export interface ComponentCustomProperties{
     $api: {
-      [prop in keyof api]: any;
-      // [prop in keyof api]: typeof api[prop];
+      // [prop in keyof api]: any;
+      [prop in keyof typeof api]: typeof api[prop];
     };
   }
 }
