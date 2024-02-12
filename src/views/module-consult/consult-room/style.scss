@@ -1,0 +1,11 @@
+.room-page {
+  padding-top: 90px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: var(--cp-bg);
+  .van-pull-refresh {
+    width: 100%;
+    min-height: calc(100vh - 150px);
+  }
+}

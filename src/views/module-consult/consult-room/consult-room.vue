@@ -1,9 +1,14 @@
 <template>
   <NavBar title="问诊室" />
 
-  <div>
+  <div class="room-page">
+    <!-- 状态栏 -->
     <RoomStatus />
+
+    <!-- 消息卡片区域 -->
     <RoomMessage />
+
+    <!-- 操作栏 -->
     <RoomAction />
   </div>
 </template>

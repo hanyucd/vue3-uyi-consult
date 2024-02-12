@@ -1,5 +1,3 @@
-
-import api from '@/api';
 <template>
   <van-action-sheet :show="show" title="选择支付方式" :close-on-popstate="false" :closeable="false" :before-close="onClose" @update:show="emit('update:show', $event)">
     <div class="pay-type">
