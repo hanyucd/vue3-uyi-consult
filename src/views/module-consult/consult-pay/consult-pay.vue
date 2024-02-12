@@ -113,7 +113,7 @@ const _getPatientDetail = async () => {
   const patientId = consultStore.consult.patientId;
   if (!patientId) return;
   const { data: patientData } = await proxy.$api.getPatientDetailApi(patientId);
-  patient.value = patientData;
+  patient.value = patientData!;
 };
 
 // 是否同意协议

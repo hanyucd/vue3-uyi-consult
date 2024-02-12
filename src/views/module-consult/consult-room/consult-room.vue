@@ -1,5 +1,5 @@
 <template>
-  <!-- <NavBar title="问诊室" /> -->
+  <NavBar title="问诊室" />
 
   <div>
     <RoomStatus />

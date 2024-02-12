@@ -102,7 +102,7 @@ const user = ref<UserInfo>();
 onMounted(async () => {
   try {
     const { data: userData } = await proxy.$api.fetchUserInfoApi();
-    user.value = userData;
+    user.value = userData!;
   } catch (error) {
     console.log(error);
   }
