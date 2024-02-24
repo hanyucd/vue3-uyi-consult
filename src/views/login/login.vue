@@ -107,7 +107,7 @@ const submitUserLogin = async () => {
 
   // console.log(loginedData);
   // 设置个人信息数据
-  userStore.setUserAction(loginedData);
+  userStore.setUserAction(loginedData!);
   showSuccessToast('登录成功');
   // 如果有回跳的页面就进进入首页
   router.replace(route.query.redirect as string || '/index');

@@ -18,6 +18,15 @@ import RoomStatus from './components/RoomStatus/RoomStatus.vue';
 import RoomAction from './components/RoomAction/RoomAction.vue';
 import RoomMessage from './components/RoomMessage/RoomMessage.vue';
 
+import { onMounted } from 'vue';
+import type { Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
+
+let socket: Socket;
+
+onMounted(() => {
+  // socket = io();
+});
 </script>
 
 <style lange="scss" scoped>
