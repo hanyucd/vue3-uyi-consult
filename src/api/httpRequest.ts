@@ -80,3 +80,5 @@ const httpRequest = <T = any>(url = '', data = {}, method: Method = 'get', other
 };
 
 export default httpRequest;
+
+export const baseURL = 'https://consult-api.itheima.net/';
