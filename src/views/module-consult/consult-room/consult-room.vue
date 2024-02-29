@@ -6,7 +6,9 @@
     <RoomStatus :status="consult?.status" :countdown="consult?.countdown" />
 
     <!-- 消息卡片区域 -->
-    <RoomMessage :list="list" />
+    <van-pull-refresh v-model="loading" @refresh="onRefresh">
+      <RoomMessage :list="list" />
+    </van-pull-refresh>
 
     <!-- 操作栏 -->
     <RoomAction
@@ -26,6 +28,8 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
+import dayjs from 'dayjs';
+import { showToast } from 'vant';
 
 import { baseURL } from '@/api/httpRequest';
 import type { Message, TimeMessages } from '@/types/room';
@@ -42,6 +46,10 @@ const route = useRoute();
 const list = ref<Message[]>([]);
 // 订单详情
 const consult = ref<ConsultOrderItem>();
+// 初始信息
+const initialMsg = ref(true);
+const loading = ref(false);
+const time = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'));
 
 let socket: Socket;
 
@@ -77,6 +85,9 @@ onMounted(() => {
     const arr: Message[] = [];
 
     data.forEach((item, index) => {
+      // 对下次刷新历史记录的时间进行赋值
+      if (index === 0) time.value = item.createTime;
+
       arr.push({
         msgType: MsgType.Notify,
         msg: { content: item.createTime },
@@ -90,6 +101,16 @@ onMounted(() => {
 
     // 追加到聊天消息列表里
     list.value.unshift(...arr);
+
+    loading.value = false;
+    if (!arr.length) return showToast('没有更多聊天记录了');
+
+    if (initialMsg.value) {
+      nextTick(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+        initialMsg.value = false;
+      });
+    }
   });
 
   // 监听订单状态变化
@@ -118,6 +139,11 @@ onUnmounted(() => {
 const _loadConsult = async () => {
   const { data: consultOrderData } = await proxy.$api.getConsultOrderDetailApi({ orderId: route.query.orderId });
   consult.value = consultOrderData;
+};
+
+const onRefresh = () => {
+  console.log('下拉刷新了');
+  socket.emit('getChatMsgList', 20, time.value, route.query.orderId);
 };
 
 /**
