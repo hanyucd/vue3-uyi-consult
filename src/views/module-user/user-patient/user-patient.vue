@@ -113,7 +113,7 @@ onMounted(() => {
  */
 const _getPatientList = async () => {
   const { data: patientData } = await proxy.$api.getPatientListApi();
-  patientArys.value = patientData;
+  patientArys.value = patientData!;
 
   // 如果是选择患者页面 并且有患者信息 需要设置默认选中病人
   if (isChange.value && patientArys.value.length) {
