@@ -3,13 +3,13 @@
 
   <div class="room-page">
     <!-- 状态栏 -->
-    <RoomStatus />
+    <RoomStatus :status="consult?.status" :countdown="consult?.countdown" />
 
     <!-- 消息卡片区域 -->
     <RoomMessage :list="list" />
 
     <!-- 操作栏 -->
-    <RoomAction />
+    <RoomAction :disabled="consult?.status !== OrderType.ConsultChat" />
   </div>
 </template>
 
@@ -21,12 +21,13 @@ import RoomMessage from './components/RoomMessage/RoomMessage.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import type { Socket } from 'socket.io-client';
-import type { Message, TimeMessages } from '@/types/room';
-import type { ConsultOrderItem, Image } from '@/types/consult';
-import { MsgType } from '@/enums';
-import { baseURL } from '@/api/httpRequest';
 import { io } from 'socket.io-client';
 
+import { baseURL } from '@/api/httpRequest';
+import type { Message, TimeMessages } from '@/types/room';
+import type { ConsultOrderItem, Image } from '@/types/consult';
+
+import { MsgType, OrderType } from '@/enums';
 import { useUserStore } from '@/stores';
 import useProxyHook from '@/hooks/useProxyHook';
 

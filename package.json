@@ -19,6 +19,7 @@
   "dependencies": {
     "@vueuse/core": "^10.7.1",
     "axios": "^1.6.3",
+    "dayjs": "^1.11.10",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",

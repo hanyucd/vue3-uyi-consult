@@ -6,15 +6,19 @@
       :border="false"
       placeholder="问医生"
       autocomplete="off"
-      :disabled="true"
+      :disabled="disabled"
     />
-    <van-uploader :preview-image="false" :disabled="true">
+    <van-uploader :preview-image="false" :disabled="disabled">
       <SvgIcon name="consult-img" />
     </van-uploader>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  disabled: boolean;
+}>();
+</script>
 
 <style lange="scss" scoped>
 @import './style.scss';
