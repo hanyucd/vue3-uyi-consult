@@ -36,4 +36,6 @@ export default {
   createConsultOrderApi: (param: object) => httpRequest(`/patient/consult/order`, param, 'post'),
   // 获取支付地址  0 是微信  1 支付宝
   getConsultOrderPayUrlApi: (param: { paymentMethod: 0 | 1; orderId: string; payCallback: string }) => httpRequest(`/patient/consult/pay`, param, 'post'),
+  // 查询订单详情信息
+  getConsultOrderDetailApi: (param: object) => httpRequest('/patient/consult/order/detail', param),
 };

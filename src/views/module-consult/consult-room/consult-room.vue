@@ -20,21 +20,29 @@ import RoomMessage from './components/RoomMessage/RoomMessage.vue';
 
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useUserStore } from '@/stores';
 import type { Socket } from 'socket.io-client';
 import type { Message, TimeMessages } from '@/types/room';
+import type { ConsultOrderItem, Image } from '@/types/consult';
 import { MsgType } from '@/enums';
 import { baseURL } from '@/api/httpRequest';
 import { io } from 'socket.io-client';
 
+import { useUserStore } from '@/stores';
+import useProxyHook from '@/hooks/useProxyHook';
+
+const proxy = useProxyHook();
 const userStore = useUserStore();
-const route =  useRoute();
+const route = useRoute();
 // 聊天消息列表
 const list = ref<Message[]>([]);
+// 订单详情
+const consult = ref<ConsultOrderItem>();
 
 let socket: Socket;
 
 onMounted(() => {
+  _loadConsult();
+  
   socket = io(baseURL, {
     auth: {
       token: `Bearer ${ userStore.userToken }`
@@ -78,12 +86,23 @@ onMounted(() => {
     // 追加到聊天消息列表里
     list.value.unshift(...arr);
   });
+
+  // 监听订单状态变化
+  socket.on('statusChange', () => _loadConsult());
 });
 
 onUnmounted(() => {
   // 手动关闭连接
   socket.close();
 });
+
+/**
+ * 查询订单详情信息
+ */
+const _loadConsult = async () => {
+  const { data: consultOrderData } = await proxy.$api.getConsultOrderDetailApi({ orderId: route.query.orderId });
+  consult.value = consultOrderData;
+};
 </script>
 
 <style lange="scss" scoped>
