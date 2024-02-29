@@ -9,7 +9,11 @@
     <RoomMessage :list="list" />
 
     <!-- 操作栏 -->
-    <RoomAction :disabled="consult?.status !== OrderType.ConsultChat" />
+    <RoomAction
+      :disabled="consult?.status !== OrderType.ConsultChat"
+      @send-text="onSendTextEvt"
+      @send-image="onSendImageEvt"
+    />
   </div>
 </template>
 
@@ -18,7 +22,7 @@ import RoomStatus from './components/RoomStatus/RoomStatus.vue';
 import RoomAction from './components/RoomAction/RoomAction.vue';
 import RoomMessage from './components/RoomMessage/RoomMessage.vue';
 
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
@@ -90,6 +94,17 @@ onMounted(() => {
 
   // 监听订单状态变化
   socket.on('statusChange', () => _loadConsult());
+
+  // 接收聊天消息
+  socket.on('receiveChatMsg', async (event) => {
+    console.log('接收消息', event);
+    list.value.push(event);
+    // 等待 DOM 更新
+    await nextTick();
+
+    // 滚动到底部
+    window.scrollTo(0, document.body.scrollHeight);
+  });
 });
 
 onUnmounted(() => {
@@ -103,6 +118,43 @@ onUnmounted(() => {
 const _loadConsult = async () => {
   const { data: consultOrderData } = await proxy.$api.getConsultOrderDetailApi({ orderId: route.query.orderId });
   consult.value = consultOrderData;
+};
+
+/**
+ * 监听发送文字事件
+ */
+// 1. 底部操作栏,输入信息,传递给父组件
+// 2. 由父组件发送消息,通过emit发送消息: sendChatMsg
+// 3. 接收消息: 用on: receiveChatMsg接收服务器返回的消息
+// 4. 渲染的时候需要区分是自己发的还是医生发的
+const onSendTextEvt = (sendText: string) => {
+  console.log(sendText);
+  socket.emit('sendChatMsg', {
+    form: userStore.userId,
+    to: consult.value?.docInfo?.id,
+    msgType: MsgType.MsgText,
+    msg: {
+      content: sendText
+    }
+  });
+};
+
+/**
+ * 监听发送图片
+ */
+// 1. 底部操作栏上传图片, 成功后把图片传递给父组件 {id, url}
+// 2. 由父组件发送消息, 通过emit   sendChatMsg
+// 3. 渲染时区分是自己发的还是医生发的
+const onSendImageEvt = (img: Image) => {
+  console.log(img);
+  socket.emit('sendChatMsg', {
+    form: userStore.userId,
+    to: consult.value?.docInfo?.id,
+    msgType: MsgType.MsgImage,
+    msg: {
+      picture: img
+    }
+  });
 };
 </script>
 
