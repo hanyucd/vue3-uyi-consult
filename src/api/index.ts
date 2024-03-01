@@ -40,5 +40,9 @@ export default {
   getConsultOrderDetailApi: (param: object) => httpRequest('/patient/consult/order/detail', param),
   // 获取未读消息数量
   getUnreadMsgCountApi: () => httpRequest('/patient/message/unRead/all'),
+  // 获取未读消息数量
+  getPrescriptionPicApi: (preId: string) => httpRequest(`/patient/consult/prescription/${preId}`),
+  // 评价问诊
+  evaluateConsultOrderApi: (param: object) => httpRequest(`/patient/order/evaluate`, param, 'post'),
 };
 

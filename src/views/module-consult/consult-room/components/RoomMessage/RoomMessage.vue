@@ -37,11 +37,11 @@
     </div>
 
     <!-- 通知-结束 -->
-    <!-- <div class="msg msg-tip msg-tip-cancel">
-    <div class="content">
-      <span>订单取消</span>
+    <div v-if="item.msgType === MsgType.NotifyCancel" class="msg msg-tip msg-tip-cancel">
+      <div class="content">
+        <span>{{ item.msg.content }}</span>
+      </div>
     </div>
-  </div> -->
 
     <!-- 发送文字 -->
     <div v-if="item.msgType === MsgType.MsgText && userStore.userId === item.from" class="msg msg-to">
@@ -79,35 +79,53 @@
       </div>
     </div>
 
-  <!-- 处方卡片 -->
-  <!-- <div class="msg msg-recipe">
-    <div class="content">
-      <div class="head van-hairline--bottom">
-        <div class="head-tit">
-          <h3>电子处方</h3>
-          <p>原始处方 <van-icon name="arrow" /></p>
-        </div>
-        <p>李富贵 男 31岁 血管性头痛</p>
-        <p>开方时间：2022-01-15 14:21:42</p>
-      </div>
-      <div class="body">
-        <div v-for="i in 2" :key="i" class="body-item">
-          <div class="durg">
-            <p>优赛明 维生素E乳</p>
-            <p>口服，每次1袋，每天3次，用药3天</p>
+    <!-- 处方卡片 -->
+    <div v-if="item.msgType === MsgType.CardPre" class="msg msg-recipe">
+      <div v-if="item.msg.prescription" class="content">
+        <div class="head van-hairline--bottom">
+          <div class="head-tit">
+            <h3>电子处方</h3>
+            <p @click="showPrescription(item.msg.prescription?.id)">
+              原始处方 <van-icon name="arrow" />
+            </p>
           </div>
-          <div class="num">x1</div>
+          <p>
+            {{ item.msg.prescription.name }}
+            {{ item.msg.prescription.genderValue }}
+            {{ item.msg.prescription.age }}岁
+            {{ item.msg.prescription.diagnosis }}
+          </p>
+          <p>开方时间：{{ item.msg.prescription.createTime }}</p>
+        </div>
+        <div class="body">
+          <div
+            v-for="med in item.msg.prescription.medicines"
+            :key="med.id"
+            class="body-item"
+          >
+            <div class="durg">
+              <p>{{ med.name }} {{ med.specs }}</p>
+              <p>{{ med.usageDosag }}</p>
+            </div>
+            <div class="num">x{{ med.quantity }}</div>
+          </div>
+        </div>
+        <div class="foot">
+          <span @click="buy(item.msg.prescription)">购买药品</span>
         </div>
       </div>
-      <div class="foot"><span>购买药品</span></div>
     </div>
-  </div> -->
 
-  <!-- 评价卡片，后期实现 -->
+    <!-- 评价卡片 -->
+    <div v-if="item.msgType === MsgType.CardEva || item.msgType === MsgType.CardEvaForm" class="msg msg-comment">
+      <EvaluteCard :evaluate-doc="item.msg.evaluateDoc" />
+    </div>
   </template>
 </template>
 
 <script setup lang="ts">
+import EvaluteCard from './components/EvaluateCard/EvaluateCard.vue';
+
 import type { Message, Prescription } from '@/types/room';
 import { MsgType } from '@/enums';
 import type { Image } from '@/types/consult';
@@ -115,6 +133,7 @@ import { showImagePreview, showToast } from 'vant';
 import dayjs from 'dayjs';
 import { getConsultFlagTimeText, getIllnessTimeText } from '@/utils/filterUtil';
 import { useUserStore } from '@/stores';
+import { useShowPrescription } from '@/hooks/useUserHook';
 
 const userStore = useUserStore();
 
@@ -134,6 +153,16 @@ const previewImage = (pictures?: Image[]) => {
 };
 
 const formatTime = (time: string) => dayjs(time).format('HH:mm');
+
+// 查看处方
+const { showPrescription } = useShowPrescription();
+
+/**
+ * 去购买商品
+ */
+const buy = (pre?: Prescription) => {
+  console.log(pre);
+};
 </script>
 
 <style lang="scss" scoped>

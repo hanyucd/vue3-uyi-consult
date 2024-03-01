@@ -1,0 +1,49 @@
+.evaluate-card {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  .title {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+  .desc {
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: var(--cp-tip);
+  }
+  .van-field {
+    background-color: var(--cp-bg);
+    margin: 15px 0;
+    border-radius: 8px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    :deep() {
+      .van-checkbox {
+        .van-icon {
+          font-size: 12px;
+        }
+        &__label {
+          font-size: 12px;
+          color: var(--cp-tip);
+        }
+        height: 16px;
+      }
+      .van-button {
+        padding: 0 16px;
+        &.disabled {
+          opacity: 1;
+          background: #fafafa;
+          color: #d9dbde;
+          border: #fafafa;
+        }
+      }
+    }
+  }
+}

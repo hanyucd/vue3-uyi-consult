@@ -24,7 +24,7 @@ import RoomStatus from './components/RoomStatus/RoomStatus.vue';
 import RoomAction from './components/RoomAction/RoomAction.vue';
 import RoomMessage from './components/RoomMessage/RoomMessage.vue';
 
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick, provide } from 'vue';
 import { useRoute } from 'vue-router';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
@@ -50,6 +50,21 @@ const consult = ref<ConsultOrderItem>();
 const initialMsg = ref(true);
 const loading = ref(false);
 const time = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+
+// 提供依赖provide
+provide('consult', consult);
+
+// 提供子组件修改卡片类型的依赖
+const completeEva = (score: number) => {
+  const evaItem = list.value.find((item) => item.msgType === MsgType.CardEvaForm);
+
+  if (evaItem) {
+    evaItem.msg.evaluateDoc = { score };
+    evaItem.msgType = MsgType.CardEva;
+  }
+};
+
+provide('completeEva', completeEva);
 
 let socket: Socket;
 

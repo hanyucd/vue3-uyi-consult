@@ -63,3 +63,15 @@ export const useFollow = (type: FollowType = 'doc') => {
 
   return { loading, follow };
 };
+
+export const useShowPrescription = () => {
+  // 查看处方
+  const showPrescription = async (id: string) => {
+    if (id) {
+      const res = await api.getPrescriptionPicApi(id);
+      showImagePreview([res.data.url]);
+    }
+  };
+  
+  return { showPrescription };
+};
