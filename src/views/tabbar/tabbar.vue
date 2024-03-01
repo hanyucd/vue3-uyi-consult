@@ -21,7 +21,7 @@
         </template>
       </van-tabbar-item>
 
-      <van-tabbar-item name="msgRoute">
+      <van-tabbar-item name="msgRoute" :badge="unredCount || ''">
         <span>消息</span>
         <template #icon="{ active }">
           <SvgIcon :name="`home-notice-${ active ? 'active' : 'default' }`" />
@@ -39,12 +39,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import useProxyHook from '@/hooks/useProxyHook';
+const proxy = useProxyHook();
 
 const router = useRouter();
 const route = useRoute();
 const tabActive = ref(route.name as string); // tab 激活
+const unredCount = ref<number>(); // 未读消息数量
+
 // console.log(route.name);
 
 watch(tabActive, (newVal) => {
@@ -52,6 +56,10 @@ watch(tabActive, (newVal) => {
   router.push({ name: newVal });
 },{ immediate: true });
 
+onMounted(async () => {
+  const { data: countData } = await proxy.$api.getUnreadMsgCountApi();
+  unredCount.value = countData;
+});
 </script>
 
 <style lange="scss" scoped>

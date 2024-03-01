@@ -54,8 +54,10 @@ const time = ref(dayjs().format('YYYY-MM-DD HH:mm:ss'));
 let socket: Socket;
 
 onMounted(() => {
+  // 加载问诊订单信息
   _loadConsult();
   
+  // 建立链接, 创建socket.id实例
   socket = io(baseURL, {
     auth: {
       token: `Bearer ${ userStore.userToken }`
@@ -107,6 +109,9 @@ onMounted(() => {
 
     if (initialMsg.value) {
       nextTick(() => {
+        // 初始化的时候把最后一条更新状态,那么之前的都会变成已读
+        socket.emit('updateMsgStatus', arr[arr.length - 1].id);
+        
         window.scrollTo(0, document.body.scrollHeight);
         initialMsg.value = false;
       });
@@ -122,7 +127,8 @@ onMounted(() => {
     list.value.push(event);
     // 等待 DOM 更新
     await nextTick();
-
+    
+    socket.emit('updateMsgStatus', event.id);
     // 滚动到底部
     window.scrollTo(0, document.body.scrollHeight);
   });
@@ -141,6 +147,9 @@ const _loadConsult = async () => {
   consult.value = consultOrderData;
 };
 
+/**
+ * 下拉刷新加载更多聊天记录
+ */
 const onRefresh = () => {
   console.log('下拉刷新了');
   socket.emit('getChatMsgList', 20, time.value, route.query.orderId);

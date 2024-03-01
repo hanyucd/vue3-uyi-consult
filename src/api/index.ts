@@ -38,4 +38,7 @@ export default {
   getConsultOrderPayUrlApi: (param: { paymentMethod: 0 | 1; orderId: string; payCallback: string }) => httpRequest(`/patient/consult/pay`, param, 'post'),
   // 查询订单详情信息
   getConsultOrderDetailApi: (param: object) => httpRequest('/patient/consult/order/detail', param),
+  // 获取未读消息数量
+  getUnreadMsgCountApi: () => httpRequest('/patient/message/unRead/all'),
 };
+
