@@ -65,6 +65,12 @@ const constantRouterMap: RouteRecordRaw[] = [
       if (to.query.payResult === 'false') return '/user/consult';
     }
   },
+  {
+    path: '/user/consult',
+    name: 'userConsultRoute',
+    component: () => import('@/views/module-user/user-consult/user-consult.vue'),
+    meta: { title: '问诊记录' },
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',
