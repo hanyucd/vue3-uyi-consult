@@ -71,6 +71,12 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: () => import('@/views/module-user/user-consult/user-consult.vue'),
     meta: { title: '问诊记录' },
   },
+  {
+    path: '/user/consult/:id',
+    name: 'userConsultDetailRoute',
+    component: () => import('@/views/module-user/user-consult-detail/user-consult-detail.vue'),
+    meta: { title: '问诊详情' },
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',
