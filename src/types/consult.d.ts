@@ -1,5 +1,5 @@
 import {
-  ConsultType,
+  ConsultTypeEnum,
   IllnessTime,
 } from '@/enums';
 
@@ -115,7 +115,7 @@ export type Consult = {
   /** 问诊记录ID */
   id: string;
   /** 问诊类型 */
-  type: ConsultType;
+  type: ConsultTypeEnum;
   /** 快速问诊类型，0 普通 1 三甲 */
   illnessType: 0 | 1;
   /** 科室ID */
@@ -215,4 +215,18 @@ export type ConsultOrderItem = Consult & {
   pointDeduction: number;
   /** 实付款 */
   actualPayment: number;
+};
+
+export type ConsultOrderListParams = PageParams & {
+  // 问诊记录类型
+  type: ConsultTypeEnum;
+};
+
+export type ConsultOrderPage = {
+  // 总页数
+  pageTotal: number;
+  // 总条数
+  total: number;
+  // 列表数据
+  rows: ConsultOrderItem[];
 };

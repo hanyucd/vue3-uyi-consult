@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ImgUpload: typeof import('./components/ImgUpload/ImgUpload.vue')['default']
     NavBar: typeof import('./components/NavBar/NavBar.vue')['default']
+    OrderRecordPopover: typeof import('./components/OrderRecordPopover/OrderRecordPopover.vue')['default']
     PayActionSheet: typeof import('./components/PayActionSheet/PayActionSheet.vue')['default']
     RadioBtn: typeof import('./components/RadioBtn/RadioBtn.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -32,6 +33,7 @@ declare module 'vue' {
     VanImage: typeof import('vant/es')['Image']
     VanList: typeof import('vant/es')['List']
     VanNavBar: typeof import('vant/es')['NavBar']
+    VanPopover: typeof import('vant/es')['Popover']
     VanPopup: typeof import('vant/es')['Popup']
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
     VanRate: typeof import('vant/es')['Rate']

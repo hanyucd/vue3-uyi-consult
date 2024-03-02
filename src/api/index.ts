@@ -44,5 +44,11 @@ export default {
   getPrescriptionPicApi: (preId: string) => httpRequest(`/patient/consult/prescription/${preId}`),
   // 评价问诊
   evaluateConsultOrderApi: (param: object) => httpRequest(`/patient/order/evaluate`, param, 'post'),
+  // 分页问诊订单列表
+  getConsultOrderListApi: (param: object) => httpRequest(`/patient/consult/order/list`, param),
+  // 取消问诊订单
+  cancelConsultOrderApi: (orderId: string) => httpRequest(`/patient/order/cancel/${orderId}`, {}, 'put'),
+  // 删除问诊订单
+  delConsultOrderApi: (orderId: string) => httpRequest(`/patient/order/${orderId}`, {}, 'delete'),
 };
 

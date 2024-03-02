@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { showImagePreview, showSuccessToast, showFailToast, type FormInstance } from 'vant';
 import type { CodeType } from '@/types/user';
 import type { FollowType, ConsultOrderItem } from '@/types/consult';
+import { OrderType } from '@/enums';
 import api from '@/api';
 
 // 命名规范 useXxx  表示使用某功能
@@ -74,4 +75,64 @@ export const useShowPrescription = () => {
   };
   
   return { showPrescription };
+};
+
+/**
+ * 封装取消订单逻辑
+ */
+export const useCancelOrderHook = () => {
+  const loading = ref(false);
+
+  const cancelConsultOrder = (item: ConsultOrderItem) => {
+    loading.value = true;
+     api.cancelConsultOrderApi(item.id)
+      .then(() => {
+        // 取消成功之后,改一下当前的项的状态
+        item.status = OrderType.ConsultCancel;
+        item.statusValue = '已取消';
+        showSuccessToast('取消成功');
+        loading.value = false;
+      })
+      .catch(() => {
+        showFailToast('取消失败');
+      })
+      .finally(() => {
+        loading.value = false;
+      });
+    };
+
+    return {
+      loading,
+      cancelConsultOrder
+    };
+};
+
+/**
+ * 封装删除订单逻辑
+ */
+export const useDeleteOrderHook = (cb: () => void) => {
+  const deleteLoading = ref(false);
+
+  const deleteConsultOrder = (item: ConsultOrderItem) => {
+    deleteLoading.value = true;
+
+    api.delConsultOrderApi(item.id)
+      .then(() => {
+        cb && cb();
+        showSuccessToast('删除成功');
+        deleteLoading.value = false;
+      })
+      .catch(() => {
+        showFailToast('删除失败');
+        // deleteLoading.value = false;
+      })
+      .finally(() => {
+        deleteLoading.value = false;
+      });
+  };
+
+  return {
+    deleteLoading,
+    deleteConsultOrder
+  };
 };
