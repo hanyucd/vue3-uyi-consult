@@ -26,10 +26,7 @@
 
     <div class="detail-patient">
       <van-cell-group :border="false">
-        <van-cell
-          title="患者信息"
-          :value="`${item.patientInfo.name} | ${item.patientInfo.genderValue} | ${item.patientInfo.age}岁`"
-        />
+        <van-cell title="患者信息" :value="`${item.patientInfo.name} | ${item.patientInfo.genderValue} | ${item.patientInfo.age}岁`" />
         <van-cell title="患病时长" :value="getIllnessTimeText(item.illnessTime)" />
         <van-cell title="就诊情况" :value="getConsultFlagTimeText(item.consultFlag)" />
         <van-cell title="病情描述" :label="item.illnessDesc" />
@@ -116,8 +113,8 @@
     </div>
   </div>
 
+  <!-- 骨架屏 -->
   <div v-else class="consult-detail-page">
-    <cp-nav-bar title="问诊详情" />
     <van-skeleton title :row="4" style="margin-top: 30px" />
     <van-skeleton title :row="4" style="margin-top: 30px" />
   </div>
@@ -151,6 +148,13 @@ const { deleteLoading, deleteConsultOrder } = useDeleteOrderHook(() => {
 });
 
 const item = ref<ConsultOrderItem>();
+
+// 提供显示变量
+const show = ref(false);
+
+watch(copied, () => {
+  if (copied.value) showToast('已复制');
+});
 
 onMounted(async () => {
   // 动态路由获取参数使用 route.params    ?后面的参数获取使用 route.query
