@@ -6,7 +6,7 @@
         <span>{{ logistics?.statusValue }}</span>
         <van-icon name="service" />
       </div>
-      
+
       <div class="current">
         <p class="status">订单派送中 预计{{ logistics?.estimatedTime }}送达</p>
         <p class="predict">
@@ -32,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import AMapLoader from '@amap/amap-jsapi-loader';
 import { ref, onMounted } from 'vue';
 import type { Logistics } from '@/types/order';
 import { useRoute } from 'vue-router';
@@ -50,8 +51,31 @@ onMounted(async () => {
   const res = await proxy.$api.getMedicalOrderLogisticsApi(route.params.id as string);
   logistics.value = res.data;
 
-  // initMap();
+  _initMap();
 });
+
+window._AMapSecurityConfig = {
+  securityJsCode: '4023ab921b5c38d4cc97ddc9f6f83cd5'
+};
+
+/**
+ * 初始化地图
+ */
+const _initMap = () => {
+  AMapLoader.load({
+    key: 'f49f88f95c60c46f3aec10ab2c435117', // 申请好的Web端开发者Key，首次调用 load 时必填
+    version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+    plugins: [''] // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+  }).then((AMap) => {
+      // 使用AMap 初始化地图
+      const map = new AMap.Map('map', {
+        //设置地图容器id
+        mapStyle: 'amap://styles/fresh',
+        zoom: 12 //初始化地图级别
+      });
+    });
+};
+
 </script>
 
 <style lange="scss" scoped>

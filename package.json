@@ -17,6 +17,7 @@
     ]
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@vueuse/core": "^10.7.1",
     "axios": "^1.6.3",
     "dayjs": "^1.11.10",
