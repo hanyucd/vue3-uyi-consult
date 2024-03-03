@@ -77,6 +77,30 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: () => import('@/views/module-user/user-consult-detail/user-consult-detail.vue'),
     meta: { title: '问诊详情' },
   },
+  {
+    path: '/order/pay',
+    name: 'orderPayRoute',
+    component: () => import('@/views/module-order/order-pay/order-pay.vue'),
+    meta: { title: '药品支付' },
+  },
+  {
+    path: '/order/pay/result',
+    name: 'orderPayResultRoute',
+    component: () => import('@/views/module-order/order-pay-result/order-pay-result.vue'),
+    meta: { title: '药品支付结果' },
+  },
+  {
+    path: '/order/:id',
+    name: 'orderPayDetailRoute',
+    component: () => import('@/views/module-order/order-pay-detail/order-pay-detail.vue'),
+    meta: { title: '药品订单详情' },
+  },
+  {
+    path: '/order/logistics/:id',
+    name: 'orderLogisticsRoute',
+    component: () => import('@/views/module-order/order-pay-logistics/order-pay-logistics.vue'),
+    meta: { title: '物流详情' },
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',

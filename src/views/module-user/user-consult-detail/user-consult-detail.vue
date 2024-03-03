@@ -15,7 +15,8 @@
         <p class="tip">服务医生信息</p>
       </div>
       <div class="card">
-        <img class="avatar" :src="item.docInfo?.avatar" alt="" />
+        <!-- <img class="avatar" :src="item.docInfo?.avatar" alt="" /> -->
+        <img class="avatar" src="@/assets/avatar-doctor.svg" alt="" />
         <p class="doc">
           <span>极速问诊</span>
           <span>{{ item.docInfo?.name }}</span>
@@ -72,7 +73,7 @@
       <van-button type="default" round :loading="loading" @click="cancelConsultOrder(item!)">
         取消问诊
       </van-button>
-      <van-button type="primary" round @click="show = true">继续支付</van-button>
+      <van-button type="primary" round @click="paySheetShow = true">继续支付</van-button>
     </div>
 
     <!-- 待接诊 -->
@@ -111,6 +112,9 @@
       </van-button>
       <van-button type="primary" round to="/">咨询其他医生</van-button>
     </div>
+
+    <!-- 支付面板 -->
+    <PayActionSheet v-model:show="paySheetShow" :order-id="item.id" :actual-payment="item.actualPayment" pay-callback="/room" />
   </div>
 
   <!-- 骨架屏 -->
@@ -150,7 +154,7 @@ const { deleteLoading, deleteConsultOrder } = useDeleteOrderHook(() => {
 const item = ref<ConsultOrderItem>();
 
 // 提供显示变量
-const show = ref(false);
+const paySheetShow = ref(false);
 
 watch(copied, () => {
   if (copied.value) showToast('已复制');

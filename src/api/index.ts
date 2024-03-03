@@ -50,5 +50,15 @@ export default {
   cancelConsultOrderApi: (orderId: string) => httpRequest(`/patient/order/cancel/${orderId}`, {}, 'put'),
   // 删除问诊订单
   delConsultOrderApi: (orderId: string) => httpRequest(`/patient/order/${orderId}`, {}, 'delete'),
+  // 查询药品订单预支付信息
+  getMedicalOrderPreApi: (param: object) => httpRequest(`/patient/medicine/order/pre`, param),
+  // 获取收货地址列表
+  getAddressListApi: () => httpRequest(`/patient/order/address`),
+  // 创建药品订单
+  createMedicalOrderApi: (param: object) => httpRequest(`/patient/medicine/order`, param, 'post'),
+  // 获取药品订单详情
+  getMedicalOrderDetailApi: (orderId: string) => httpRequest(`/patient/medicine/order/detail/${orderId}`),
+  // 获取药品订单物流信息
+  getMedicalOrderLogisticsApi: (orderId: string) => httpRequest(`/patient/order/${orderId}/logistics`),
 };
 

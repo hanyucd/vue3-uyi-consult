@@ -1,5 +1,6 @@
 <template>
-  <NavBar title="极速问诊" right-text="问诊记录" />
+  <NavBar title="极速问诊" right-text="问诊记录" @click-right="$router.push('/user/consult')" />
+
   <div class="consult-fast-page">
     <div class="fast-logo">
       <img class="img" src="@/assets/consult-fast.png" alt="" />

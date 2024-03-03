@@ -126,8 +126,9 @@
 <script setup lang="ts">
 import EvaluteCard from './components/EvaluateCard/EvaluateCard.vue';
 
+import { useRouter } from 'vue-router';
 import type { Message, Prescription } from '@/types/room';
-import { MsgType } from '@/enums';
+import { MsgType, PrescriptionStatus } from '@/enums';
 import type { Image } from '@/types/consult';
 import { showImagePreview, showToast } from 'vant';
 import dayjs from 'dayjs';
@@ -136,6 +137,7 @@ import { useUserStore } from '@/stores';
 import { useShowPrescription } from '@/hooks/useUserHook';
 
 const userStore = useUserStore();
+const router = useRouter();
 
 defineProps<{
   list: Message[];
@@ -161,7 +163,14 @@ const { showPrescription } = useShowPrescription();
  * 去购买商品
  */
 const buy = (pre?: Prescription) => {
-  console.log(pre);
+  if (!pre) return;
+  
+  if (pre.status === PrescriptionStatus.Invalid) return showToast('失效订单');
+
+  if (pre.status === PrescriptionStatus.NotPayment && !pre.orderId) {
+    return router.push(`/order/pay?id=${pre.id}`);
+  }
+  router.push(`/order/${pre.orderId}`);
 };
 </script>
 

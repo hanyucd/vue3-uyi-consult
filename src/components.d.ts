@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ImgUpload: typeof import('./components/ImgUpload/ImgUpload.vue')['default']
     NavBar: typeof import('./components/NavBar/NavBar.vue')['default']
+    OrderMedical: typeof import('./components/OrderMedical/OrderMedical.vue')['default']
     OrderRecordPopover: typeof import('./components/OrderRecordPopover/OrderRecordPopover.vue')['default']
     PayActionSheet: typeof import('./components/PayActionSheet/PayActionSheet.vue')['default']
     RadioBtn: typeof import('./components/RadioBtn/RadioBtn.vue')['default']
@@ -48,6 +49,7 @@ declare module 'vue' {
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
     VanTabs: typeof import('vant/es')['Tabs']
+    VanTag: typeof import('vant/es')['Tag']
     VanUploader: typeof import('vant/es')['Uploader']
   }
 }
