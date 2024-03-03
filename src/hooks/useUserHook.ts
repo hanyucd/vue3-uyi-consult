@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { showImagePreview, showSuccessToast, showFailToast, type FormInstance } from 'vant';
 import type { CodeType } from '@/types/user';
 import type { FollowType, ConsultOrderItem } from '@/types/consult';
+import type { OrderDetail } from '@/types/order';
 import { OrderType } from '@/enums';
 import api from '@/api';
 
@@ -134,5 +135,25 @@ export const useDeleteOrderHook = (cb: () => void) => {
   return {
     deleteLoading,
     deleteConsultOrder
+  };
+};
+
+// 获取订单详情数据 (并不是很推荐这种封装)
+export const useOrderDetailHook = (id: string) => {
+  const order = ref<OrderDetail>();
+  const loading = ref(false);
+
+  onMounted(async () => {
+    loading.value = true;
+    try {
+      const res = await api.getMedicalOrderDetailApi(id);
+      order.value = res.data;
+    } finally {
+      loading.value = false;
+    }
+  });
+  return {
+    order,
+    loading
   };
 };

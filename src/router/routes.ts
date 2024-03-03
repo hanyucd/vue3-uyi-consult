@@ -92,7 +92,7 @@ const constantRouterMap: RouteRecordRaw[] = [
   {
     path: '/order/:id',
     name: 'orderPayDetailRoute',
-    component: () => import('@/views/module-order/order-pay-detail/order-pay-detail.vue'),
+    component: () => import('@/views/module-order/order-detail/order-detail.vue'),
     meta: { title: '药品订单详情' },
   },
   {

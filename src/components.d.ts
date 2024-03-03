@@ -18,6 +18,7 @@ declare module 'vue' {
     SvgIcon: typeof import('./components/SvgIcon/SvgIcon.vue')['default']
     VanActionBar: typeof import('vant/es')['ActionBar']
     VanActionBarButton: typeof import('vant/es')['ActionBarButton']
+    VanActionBarIcon: typeof import('vant/es')['ActionBarIcon']
     VanActionSheet: typeof import('vant/es')['ActionSheet']
     VanBadge: typeof import('vant/es')['Badge']
     VanButton: typeof import('vant/es')['Button']
