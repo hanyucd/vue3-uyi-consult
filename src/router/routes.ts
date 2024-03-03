@@ -98,7 +98,7 @@ const constantRouterMap: RouteRecordRaw[] = [
   {
     path: '/order/logistics/:id',
     name: 'orderLogisticsRoute',
-    component: () => import('@/views/module-order/order-pay-logistics/order-pay-logistics.vue'),
+    component: () => import('@/views/module-order/order-logistics/order-logistics.vue'),
     meta: { title: '物流详情' },
   },
   // 404
