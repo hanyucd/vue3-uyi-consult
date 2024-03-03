@@ -1,0 +1,141 @@
+.order-detail-page {
+  padding-top: 46px;
+  padding-bottom: 65px;
+}
+.order-head {
+  position: relative;
+  padding: 15px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(44, 181, 165, 0), rgba(44, 181, 165, 0.2));
+    border-bottom-left-radius: 150px 20px;
+    border-bottom-right-radius: 150px 20px;
+  }
+  .card {
+    height: 74px;
+    background-color: #fff;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    box-shadow: 0px 0px 22px 0px rgba(229, 229, 229, 0.5);
+    .logistics {
+      flex: 1;
+      p {
+        &:first-child {
+          color: var(--cp-primary);
+        }
+        &:last-child {
+          color: var(--cp-tag);
+          font-size: 13px;
+          margin-top: 5px;
+        }
+      }
+    }
+    .van-icon {
+      color: var(--cp-tip);
+    }
+  }
+}
+:deep(.van-cell) {
+  .van-cell__title {
+    font-size: 16px;
+    flex: none;
+    width: 100px;
+  }
+  .van-cell__value {
+    font-size: 16px;
+  }
+  &.price {
+    .van-cell__value {
+      font-size: 18px;
+      color: var(--cp-price);
+    }
+  }
+}
+.order-medical {
+  background-color: #fff;
+  padding: 0 15px;
+  .head {
+    display: flex;
+    height: 54px;
+    align-items: center;
+    > h3 {
+      font-size: 16px;
+      font-weight: normal;
+    }
+    > small {
+      font-size: 13px;
+      color: var(--cp-tag);
+      margin-left: 10px;
+    }
+  }
+  .item {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0;
+    .img {
+      width: 80px;
+      height: 70px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .info {
+      padding-left: 15px;
+      width: 250px;
+      .name {
+        display: flex;
+        font-size: 15px;
+        margin-bottom: 5px;
+        > span:first-child {
+          width: 200px;
+        }
+        > span:last-child {
+          width: 50px;
+          text-align: right;
+        }
+      }
+      .size {
+        margin-bottom: 5px;
+        .van-tag {
+          background-color: var(--cp-primary);
+          vertical-align: middle;
+        }
+        span:not(.van-tag) {
+          margin-left: 10px;
+          color: var(--cp-tag);
+          vertical-align: middle;
+        }
+      }
+      .price {
+        font-size: 16px;
+        color: #eb5757;
+      }
+    }
+    .desc {
+      width: 100%;
+      background-color: var(--cp-bg);
+      border-radius: 4px;
+      margin-top: 10px;
+      padding: 4px 10px;
+      color: var(--cp-tip);
+    }
+  }
+}
+.van-action-bar {
+  padding: 0 10px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  .price {
+    padding: 0 10px;
+    > span {
+      font-size: 18px;
+      color: var(--cp-price);
+    }
+  }
+}
