@@ -108,6 +108,21 @@ const constantRouterMap: RouteRecordRaw[] = [
       title: 'QQ登录-绑定手机'
     }
   },
+  {
+    path: '/consult/medicine',
+    component: () => import('@/views/module-consult/consult-medicine/consult-medicine.vue'),
+    meta: { title: '开药门诊' }
+  },
+  {
+    path: '/consult/choose',
+    component: () => import('@/views/module-consult/consult-medicine-choose/consult-medicine-choose.vue'),
+    meta: { title: '选择药品' }
+  },
+  {
+    path: '/consult/doctor',
+    component: () => import('@/views/module-consult/consult-doctor/consult-doctor.vue'),
+    meta: { title: '找医生' }
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',

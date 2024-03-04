@@ -18,7 +18,7 @@
 
 [一文彻底读懂ESLint](https://xieyufei.com/2021/04/25/Front-Eslint.html)
 
-Vue + Ts 项目配置 ESLint 所需插件  
+### Vue + Ts 项目配置 ESLint 所需插件  
 
 - eslint ESLint 的核心代码
 

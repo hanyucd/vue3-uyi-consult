@@ -90,7 +90,9 @@ const bindMobile = async () => {
   _loginSuccess(res.data!);
 };
 
-// 登录成功
+/**
+ * 登录成功-保存用户信息
+ */
 const _loginSuccess = (data: User) => {
   userStore.setUserAction(data);
   router.replace(userStore.returnUrl || '/user');

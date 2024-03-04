@@ -187,6 +187,8 @@ const deletePatient = async () => {
 
 // isChange如果为true  那么就是选择患者页面
 const isChange = computed(() => route.query.isChange === '1');
+// 是否来自开药门诊
+const fromMedicineConsultFlag = computed(() => route.query.from === 'medicineConsult');
 
 // 选择效果
 const patientId = ref('');
@@ -203,7 +205,11 @@ const selectPatient = (item: Patient) => {
 const nextStep = () => {
   if (!patientId.value) return showToast('请选择患者');
   consultStore.setPatientAction(patientId.value);
-  router.push('/consult/pay');
+  if (fromMedicineConsultFlag.value) {
+    router.push('/consult/choose');
+  } else {
+    router.push('/consult/pay');
+  }
 };
 </script>
 

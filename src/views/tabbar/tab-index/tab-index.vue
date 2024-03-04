@@ -14,7 +14,7 @@
     <div class="home-navs">
       <van-row>
         <van-col span="8">
-          <router-link to="/" class="nav">
+          <router-link to="/consult/doctor" class="nav">
             <SvgIcon name="home-doctor" />
             <p class="title">问医生</p>
             <p class="desc">按科室查问医生</p>
@@ -30,7 +30,7 @@
         </van-col>
         
         <van-col span="8">
-          <router-link to="/" class="nav">
+          <router-link to="/consult/medicine" class="nav">
             <SvgIcon name="home-prescribe" />
             <p class="title">开药门诊</p>
             <p class="desc">线上买药更方便</p>

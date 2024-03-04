@@ -1,0 +1,46 @@
+.van-action-bar {
+  border-top: 1px solid rgba(237, 237, 237, 0.9);
+  .total-price {
+    width: 200px;
+    font-size: 24px;
+    line-height: 18px;
+    font-weight: 700;
+    color: #121826;
+  }
+}
+.content {
+  --content-height: 400px;
+  --content-header-height: 25px;
+  padding: 16px;
+  height: var(--content-height);
+  .content-header {
+    position: sticky;
+    top: 0px;
+    z-index: 10;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--content-header-height);
+    padding-bottom: 10px;
+    &-left {
+      span {
+        font-size: 16px;
+        color: #000000;
+        margin-right: 10px;
+      }
+      span + span {
+        font-size: 13px;
+        color: var(--cp-primary);
+      }
+    }
+    &-right {
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+  .medicine-list {
+    padding-bottom: 45px;
+  }
+}

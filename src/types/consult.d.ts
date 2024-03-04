@@ -1,7 +1,17 @@
-import {
+import type {
+  AllergicHistory,
   ConsultTypeEnum,
+  FertilityStatus,
   IllnessTime,
+  LiverFunction,
+  OrderType,
+  PositionalTitles,
+  PriceRange,
+  RenalFunction
 } from '@/enums';
+
+import type { Patient } from './user';
+import type { Medical } from './room';
 
 // 文章信息类型
 export type Knowledge = {
@@ -171,6 +181,9 @@ export type ConsultIllness = Pick<PartialConsult, 'illnessDesc' | 'illnessTime' 
 // 问诊订单预支付传参
 export type ConsultOrderPreParams = Pick<PartialConsult, 'type' | 'illnessType' | 'docId'>;
 
+// 开药问诊对象
+export type MedicineIllness = Pick<PartialConsult, 'illnessDesc' | 'liverFunction' | 'renalFunction' | 'allergicHistory' | 'fertilityStatus' | 'pictures'>; 
+
 // 问诊订单预支付信息
 export type ConsultOrderPreData = {
   /** 积分抵扣 */
@@ -230,3 +243,20 @@ export type ConsultOrderPage = {
   // 列表数据
   rows: ConsultOrderItem[];
 };
+
+// 药品列表查询参数
+export type MedicineParams = PageParams & {
+  keyword: string;
+};
+
+export type BasePage<T = any> = {
+  pageTotal: number;
+  total: number;
+  rows: T;
+};
+
+// 药品列表
+export type MedicineList = Medical[];
+
+// 药品列表带分页
+export type MedicinePage = BasePage<MedicineList>;

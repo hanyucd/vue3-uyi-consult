@@ -1,0 +1,36 @@
+.consult-medicine-page {
+  padding-top: 46px;
+  .van-button {
+    font-size: 16px;
+    margin-bottom: 30px;
+    &.disabled {
+      opacity: 1;
+      background: #fafafa;
+      color: #d9dbde;
+      border: #fafafa;
+    }
+  }
+  .illness-form {
+    padding: 0 15px 15px 15px;
+    .adm-list-header {
+      padding-bottom: 5px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #121826;
+      border-bottom: none;
+      margin-top: 30px;
+    }
+    .van-field {
+      padding: 0;
+      &::after {
+        border-bottom: none;
+      }
+    }
+    .item {
+      > p {
+        color: var(--cp-text3);
+        padding: 15px 0;
+      }
+    }
+  }
+}

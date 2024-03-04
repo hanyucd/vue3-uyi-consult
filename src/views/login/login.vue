@@ -69,7 +69,8 @@ import useProxyHook from '@/hooks/useProxyHook';
 // 密码 abc12345
 // const mobile = ref<string>(''); // 手机号
 // const password = ref<string>(''); // 密码
-const mobile = ref('13230000001');
+// const mobile = ref('13230000001');
+const mobile = ref('13211112222');
 const password = ref('abc12345');
 
 const code = ref<string>(''); // 验证码
