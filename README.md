@@ -18,6 +18,16 @@
 
 [一文彻底读懂ESLint](https://xieyufei.com/2021/04/25/Front-Eslint.html)
 
+Vue + Ts 项目配置 ESLint 所需插件  
+
+- eslint ESLint 的核心代码
+
+- eslint-plugin-vue Vue.js 的官方 ESLint 插件，它允许我们使用 ESLint 检查文件中的 Vue 代码
+
+- @typescript-eslint/parser ESLint 的解析器，用于解析 typescript，从而检查和规范 Typescript 代码
+
+- @typescript-eslint/eslint-plugin 包含了各类定义好的检测 Typescript 代码的规范
+
 ### 移动端H5适配方案：
 
 1. rem 布局
@@ -64,3 +74,14 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 4.登录成功，跳转到来源页面  
 5.登录失败，显示绑定手机界面  
 6.绑定成功，跳转到来源页面  
+
+### 成果展示
+
+![](./display/uyi-login.png)
+![](./display/uyi-home.png)
+![](./display/uyi-profile.png)
+![](./display/uyi-chat.png)
+![](./display/uyi-desc.png)
+![](./display/uyi-map.png)
+![](./display/uyi-record.png)
+![](./display/uyi-pay.png)
