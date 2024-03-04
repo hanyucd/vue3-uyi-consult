@@ -6,6 +6,10 @@ export default {
   userLoginByPasswordApi: (param: { mobile: string; password: string }) => httpRequest<User>(`/login/password`, param, 'post'),
   // 用户验证码登录
   userLoginBySMSApi: (param: { mobile: string; code: string }) => httpRequest<User>(`/login`, param, 'post'),
+  // 用户第三方登录(qq)
+  userLoginByQQApi: (openId: string) => httpRequest<User>(`/login/thirdparty`, { openId, source: 'qq' }, 'post'),
+  // 用户绑定手机号
+  userBindMobileApi: (param: object) => httpRequest<User>(`/login/binding`, param, 'post'),
   // 发送手机验证码
   sendMobileSMSApi: (param: object) => httpRequest(`/code`, param),
   // 拉取用户信息

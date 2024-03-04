@@ -49,9 +49,9 @@
     <!-- 底部 -->
     <div class="login-other">
       <van-divider>第三方登录</van-divider>
-      <div class="icon">
+      <a class="icon" :href="qqUrl">
         <img src="@/assets/qq.svg" alt="" />
-      </div>
+      </a>
     </div>
   </div>
 </template>
@@ -59,11 +59,11 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { mobileRules, passwordRules, codeRules } from '@/utils/ruleUtil';
-import { useUserStore } from '@/stores';
-import useProxyHook from '@/hooks/useProxyHook';
 import { useMobileHook } from '@/hooks/useUserHook';
 import { useRoute, useRouter } from 'vue-router';
 import { showToast, showSuccessToast } from 'vant';
+import { useUserStore } from '@/stores';
+import useProxyHook from '@/hooks/useProxyHook';
 
 // 手机号 13230000001 - 13230000100
 // 密码 abc12345
@@ -85,6 +85,11 @@ const { loginFormRef, smsTime, sendSMScode } = useMobileHook(mobile);
 
 onMounted(() => {
   // console.log(route);
+
+  // eslint-disable-next-line no-undef
+  // window.QC.Login({
+  //   btnId: 'qq'
+  // });
 });
 
 // 组件卸载的时候需要清空定时器,防止内存泄漏
@@ -112,6 +117,13 @@ const submitUserLogin = async () => {
   // 如果有回跳的页面就进进入首页
   router.replace(route.query.redirect as string || '/index');
 };
+
+const qqUrl = `https://graph.qq.com/oauth2.0/authorize?client_id=102015968&response_type=token&scope=all&redirect_uri=${encodeURIComponent(
+  'http://consult-patients.itheima.net' + '/login/callback'
+)}`;
+
+// const qqUrl = 'https://graph.qq.com/oauth2.0/authorize?client_id=102015968&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fconsult-patients.itheima.net%2Flogin%2Fcallback';
+
 </script>
 
 <style lange="scss" scoped>

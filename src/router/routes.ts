@@ -101,6 +101,13 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: () => import('@/views/module-order/order-logistics/order-logistics.vue'),
     meta: { title: '物流详情' },
   },
+  {
+    path: '/login/callback',
+    component: () => import('@/views/login-callback/login-callback.vue'),
+    meta: {
+      title: 'QQ登录-绑定手机'
+    }
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',
