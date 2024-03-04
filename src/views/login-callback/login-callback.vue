@@ -1,11 +1,12 @@
 <template>
   <NavBar />
+
   <div v-if="isBind" class="login-page">
     <div class="login-head">
       <h3>手机绑定</h3>
     </div>
 
-    <van-form ref="loginFormRef" autocomplete="off" @submit="bind">
+    <van-form ref="loginFormRef" autocomplete="off" @submit="bindMobile">
       <van-field
         v-model="mobile"
         :rules="mobileRules"
@@ -41,6 +42,8 @@ import { mobileRules, codeRules } from '@/utils/ruleUtil';
 import useProxyHook from '@/hooks/useProxyHook';
 
 const proxy = useProxyHook();
+const router = useRouter();
+const userStore = useUserStore();
 
 // 1. 获取openId
 const openId = ref('');
@@ -51,13 +54,15 @@ onMounted(() => {
   
   if (QC.Login.check()) {
     QC.Login.getMe((id) => {
-      console.log('QQ互联：', id);
+      console.log('QQ互联ID：', id);
       openId.value = id;
 
       proxy.$api.userLoginByQQApi(openId.value)
         .then(res => {
           // 登录成功的话直接跳走
           console.log('登录成功了,只不过现在没跳转', id);
+
+          _loginSuccess(res.data!);
         })
         .catch(error => {
           // 登录失败
@@ -71,10 +76,30 @@ onMounted(() => {
 const mobile = ref('');
 const code = ref('');
 
-// 绑定手机号
-const bind = async () => {};
+/**
+ * 绑定手机号
+ */
+const bindMobile = async () => {
+  const res = await proxy.$api.userBindMobileApi({
+    mobile: mobile.value,
+    code: code.value,
+    openId: openId.value
+  });
+  
+  console.log('绑定', res);
+  _loginSuccess(res.data!);
+};
 
-const { loginFormRef, smsTime, sendSMScode } = useMobileHook(mobile);
+// 登录成功
+const _loginSuccess = (data: User) => {
+  userStore.setUserAction(data);
+  router.replace(userStore.returnUrl || '/user');
+  userStore.setReturnUrlAction('');
+
+  showToast('登录成功');
+};
+
+const { loginFormRef, smsTime, sendSMScode } = useMobileHook(mobile, 'bindMobile');
 </script>
 
 <style lange="scss" scoped>

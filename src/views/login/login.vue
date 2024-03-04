@@ -49,7 +49,7 @@
     <!-- 底部 -->
     <div class="login-other">
       <van-divider>第三方登录</van-divider>
-      <a class="icon" :href="qqUrl">
+      <a class="icon" :href="qqUrl" @click="userStore.setReturnUrlAction(route.query.redirect as string)"> 
         <img src="@/assets/qq.svg" alt="" />
       </a>
     </div>
@@ -118,12 +118,10 @@ const submitUserLogin = async () => {
   router.replace(route.query.redirect as string || '/index');
 };
 
+// QQ登录地址
 const qqUrl = `https://graph.qq.com/oauth2.0/authorize?client_id=102015968&response_type=token&scope=all&redirect_uri=${encodeURIComponent(
   'http://consult-patients.itheima.net' + '/login/callback'
 )}`;
-
-// const qqUrl = 'https://graph.qq.com/oauth2.0/authorize?client_id=102015968&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fconsult-patients.itheima.net%2Flogin%2Fcallback';
-
 </script>
 
 <style lange="scss" scoped>

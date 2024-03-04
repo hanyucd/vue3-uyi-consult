@@ -4,10 +4,12 @@ import type { User } from '@/types/user';
 export const useUserStore = defineStore('userModule', {
   // persist: true,
   persist: {
-    key: 'user_info'
+    key: 'user_info',
+    paths: ['user']
   },
   state: () => ({
-    user: {} as User | {}
+    user: {} as User | {},
+    returnUrl: ''
   }),
   getters: {
     // userId: (state) => (state.user as User).id || ''
@@ -20,6 +22,10 @@ export const useUserStore = defineStore('userModule', {
     },
     delUserAction() {
       this.user = {};
+    },
+    // 记录回跳地址
+    setReturnUrlAction(_url: string) {
+      (this.returnUrl = _url);
     }
   }
 });
