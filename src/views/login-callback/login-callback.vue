@@ -66,7 +66,7 @@ onMounted(() => {
         })
         .catch(error => {
           // 登录失败
-          console.log('登录失败了');
+          console.log('登录失败了', error);
           isBind.value = true;
         });
     });

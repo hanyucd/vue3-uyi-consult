@@ -18,7 +18,7 @@
 
 [一文彻底读懂ESLint](https://xieyufei.com/2021/04/25/Front-Eslint.html)
 
-移动端H5适配方案：
+### 移动端H5适配方案：
 
 1. rem 布局
 
@@ -35,7 +35,7 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 - postcss-px-to-viewport
 ```
 
-第三方支付解决方案（支付宝）
+### 第三方支付解决方案（支付宝）
 
 ![支付宝](./display/alipay.png)
 
@@ -47,7 +47,7 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 - 使用浏览器账号密码支付 （测试推荐）
 - 支付成功回跳到问诊室页面
 
-第三方登录-QQ登录流程
+### 第三方登录-QQ登录流程
 
 ![QQ](./display/qq-login.png)
 

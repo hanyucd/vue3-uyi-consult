@@ -46,7 +46,7 @@ router.beforeEach((to, from) => {
 router.afterEach((to, from) => {
   NProgress.done();
   // 建议修改标题放 后置守卫 ，切换路由完成后修改标题
-  document.title = `U医-${ to.meta.title || '' }`;
+  document.title = `${ import.meta.env.VITE_APP_TITLE }-${ to.meta.title || '' }`;
 });
 
 export default router;
