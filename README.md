@@ -77,11 +77,22 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 
 ### 成果展示
 
-![](./display/uyi-login.png)
+<div  align="center">    
+  <img src="./display/uyi-login.png" width="400" height="630" />
+  <img src="./display/uyi-home.png" width="400" height="630" />
+  <img src="./display/uyi-profile.png" width="400" height="630" />
+  <img src="./display/uyi-chat.png" width="400" height="630" />
+  <img src="./display/uyi-desc.png" width="400" height="630" />
+  <img src="./display/uyi-map.png" width="400" height="630" />
+  <img src="./display/uyi-record.png" width="400" height="630" />
+  <img src="./display/uyi-pay.png" width="400" height="630" />
+</div>
+
+<!-- ![](./display/uyi-login.png)
 ![](./display/uyi-home.png)
 ![](./display/uyi-profile.png)
 ![](./display/uyi-chat.png)
 ![](./display/uyi-desc.png)
 ![](./display/uyi-map.png)
 ![](./display/uyi-record.png)
-![](./display/uyi-pay.png)
+![](./display/uyi-pay.png) -->
