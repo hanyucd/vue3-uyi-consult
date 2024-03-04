@@ -19,5 +19,5 @@ app.use(pinia);
 
 app.mount('#app');
 
-console.log(import.meta.env);
+console.log('当前环境：', import.meta.env);
 

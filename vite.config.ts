@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite';
 import { VantResolver } from 'unplugin-vue-components/resolvers';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { viteMockServe } from 'vite-plugin-mock';
 import path from 'path';
 
 // https://vitejs.dev/config/
@@ -17,8 +18,8 @@ export default defineConfig({
     },
   },
   server: {
-    // port: 8080,
-    port: 80,
+    port: 8080,
+    // port: 80,
     host: true,
     proxy: {
       '/api': {
@@ -32,6 +33,10 @@ export default defineConfig({
     vue(),
     eslintPlugin(),
     createHtmlPlugin(),
+    viteMockServe({
+      mockPath: './src/mock',
+      enable: true
+    }),
     // 自动导入组件
     Components({
       dts: 'src/components.d.ts', // generate `components.d.ts` global declarations

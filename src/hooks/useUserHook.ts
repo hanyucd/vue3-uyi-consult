@@ -1,6 +1,5 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { showImagePreview, showSuccessToast, showFailToast, type FormInstance } from 'vant';
 import type { CodeType } from '@/types/user';
 import type { FollowType, ConsultOrderItem } from '@/types/consult';

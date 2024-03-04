@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores';
-const userStore = useUserStore();
+// import { useUserStore } from '@/stores';
+// // const userStore = useUserStore();
 
-import useProxyHook from '@/hooks/useProxyHook';
-const proxy = useProxyHook();
+// import useProxyHook from '@/hooks/useProxyHook';
+// const proxy = useProxyHook();
 </script>
 
 <style lang="scss" scoped>
