@@ -43,7 +43,11 @@ import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useConsultStore } from '@/stores';
 import { showDialog, showToast } from 'vant';
+import { ConsultTypeEnum } from '@/enums';
+import { getCreateOrderParams } from '@/utils/createOrderParamUtil';
+import useProxyHook from '@/hooks/useProxyHook';
 
+const proxy = useProxyHook();
 const router = useRouter();
 const consultStore = useConsultStore();
 
@@ -86,8 +90,28 @@ const openCart = () => {
   show.value = false;
 };
 
-// TODO:
-const onAskDocotor = async () => {};
+const onAskDocotor = async () => {
+  const medicines = consultStore.consult.medicines || [];
+
+  if (medicines?.length === 0) return showToast('请先选药');
+
+  const params = getCreateOrderParams(consultStore.consult, ConsultTypeEnum.Medication);
+
+  try {
+    const { data } = await proxy.$api.createConsultOrderApi(params);
+    router.push(`/room?orderId=${data.id}&from=medicine`);
+  } catch (e) {
+    return showDialog({
+      title: '温馨提示',
+      message: '问诊信息不完整请重新填写',
+      closeOnPopstate: false
+    }).then(() => {
+      router.push('/');
+    });
+  } finally {
+    consultStore.clearConsultAction();
+  }
+};
 
 const onAddToCart = () => {
   emits('addToCart');

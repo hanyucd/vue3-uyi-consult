@@ -9,15 +9,34 @@
           {{ item.msg.consultRecord?.patientInfo.age }}岁
         </p>
         <p v-if="item.msg.consultRecord">
-          {{ getIllnessTimeText(item.msg.consultRecord.illnessTime) }} |
-          {{ getConsultFlagTimeText(item.msg.consultRecord.consultFlag) }}
+          <span v-if="from === 'medicine'">
+            肝功能
+            {{ getLiverFunctionText(item.msg.consultRecord.liverFunction) }} |
+            肾功能
+            {{ getRenalFunctionText(item.msg.consultRecord.renalFunction) }} |
+            过敏史
+            {{ getAllergicHistoryText(item.msg.consultRecord.allergicHistory) }} |
+            生育状态
+            {{ getFertilityStatusText(item.msg.consultRecord.fertilityStatus) }}
+          </span>
+          <span v-else>
+            {{ getIllnessTimeText(item.msg.consultRecord.illnessTime) }} |
+            {{ getConsultFlagTimeText(item.msg.consultRecord.consultFlag) }}
+          </span>
         </p>
       </div>
+      
       <van-row>
         <van-col span="6">病情描述</van-col>
         <van-col span="18">{{ item.msg.consultRecord?.illnessDesc }}</van-col>
         <van-col span="6">图片</van-col>
         <van-col span="18" @click="previewImage(item.msg.consultRecord?.pictures)">点击查看</van-col>
+        <van-col v-if="from === 'medicine'" span="6">用药需求</van-col>
+        <van-col v-if="from === 'medicine'" span="18">
+          {{
+            item.msg.consultRecord?.medicines.map((item) => `${item.name} ${item.specs} X${item.quantity}`).join(',')
+          }}
+        </van-col>
       </van-row>
     </div>
   
@@ -126,22 +145,33 @@
 <script setup lang="ts">
 import EvaluteCard from './components/EvaluateCard/EvaluateCard.vue';
 
-import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import type { Message, Prescription } from '@/types/room';
 import { MsgType, PrescriptionStatus } from '@/enums';
 import type { Image } from '@/types/consult';
 import { showImagePreview, showToast } from 'vant';
 import dayjs from 'dayjs';
-import { getConsultFlagTimeText, getIllnessTimeText } from '@/utils/filterUtil';
+import {
+  getIllnessTimeText,
+  getConsultFlagTimeText,
+  getAllergicHistoryText,
+  getFertilityStatusText,
+  getLiverFunctionText,
+  getRenalFunctionText
+} from '@/utils/filterUtil';
 import { useUserStore } from '@/stores';
 import { useShowPrescription } from '@/hooks/useUserHook';
 
 const userStore = useUserStore();
+const route = useRoute();
 const router = useRouter();
 
 defineProps<{
   list: Message[];
 }>();
+
+const from = computed(() => route.query.from);
 
 /**
  * 预览图片
