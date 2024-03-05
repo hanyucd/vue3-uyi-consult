@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import MedicineList from './components/MedicineList/MedicineList.vue';
-import MedicineAction from './components/MedicineAction/MedicineAction.vue';
+import MedicineList from '../components/MedicineList/MedicineList.vue';
+import MedicineAction from '../components/MedicineAction/MedicineAction.vue';
 
 const searchValue = ref('');
 

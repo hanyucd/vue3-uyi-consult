@@ -1,0 +1,66 @@
+.medicine-detail-page {
+  padding: 46px 0px 45px;
+  .van-swipe {
+    img {
+      width: 100%;
+    }
+  }
+
+  .detail-top {
+    padding: 15px;
+    .info {
+      padding-left: 15px;
+      width: 250px;
+      .name {
+        display: flex;
+        font-size: 15px;
+        margin-bottom: 5px;
+        > span:first-child {
+          width: auto;
+        }
+        > span:last-child {
+          text-align: right;
+        }
+      }
+      .size {
+        margin-bottom: 5px;
+        .van-tag {
+          background-color: var(--cp-primary);
+          vertical-align: middle;
+        }
+        span:not(.van-tag) {
+          margin-left: 10px;
+          color: var(--cp-tag);
+          vertical-align: middle;
+        }
+      }
+      .price {
+        font-size: 16px;
+        color: #eb5757;
+      }
+    }
+  }
+  .detail-bottom {
+    padding: 15px;
+    .info-item {
+      margin-bottom: 30px;
+      .info-title {
+        font-size: 18px;
+        font-family: PingFang SC, PingFang SC-Medium;
+        font-weight: 500;
+        color: #000000;
+      }
+      .info-desc {
+        margin-top: 10px;
+        font-size: 14px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: 400;
+        color: #3c3e42;
+      }
+    }
+  }
+  .pay-space {
+    height: 12px;
+    background-color: var(--cp-bg);
+  }
+}

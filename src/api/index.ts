@@ -66,5 +66,7 @@ export default {
   getMedicalOrderLogisticsApi: (orderId: string) => httpRequest(`/patient/order/${orderId}/logistics`),
   // 获取药品列表
   getMedicinePageApi: (param: object) => httpRequest(`/patient/medicine`, param),
+  // 获取药品订单详情
+  getMedicineDetailApi: (medicineId: string) => httpRequest(`/patient/medicine/${medicineId}`),
 };
 

@@ -119,6 +119,11 @@ const constantRouterMap: RouteRecordRaw[] = [
     meta: { title: '选择药品' }
   },
   {
+    path: '/medicineDetail/:id',
+    component: () => import('@/views/module-consult/consult-medicine-detail/consult-medicine-detail.vue'),
+    meta: { title: '药品详情' }
+  },
+  {
     path: '/consult/doctor',
     component: () => import('@/views/module-consult/consult-doctor/consult-doctor.vue'),
     meta: { title: '找医生' }
