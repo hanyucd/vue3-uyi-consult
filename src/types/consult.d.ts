@@ -290,3 +290,30 @@ export type MedicineDetail = Medical & {
   deleteState: number;
   mainPictures: string[];
 };
+
+/**
+ * default_ascend 综合排序
+ * score_ascend 评分
+ * consultationNum_ascend 咨询量
+ * serviceFee_ascend 价格
+ */
+export type DoctorOrderType =
+  | 'default_ascend'
+  | 'score_ascend'
+  | 'consultationNum_ascend'
+  | 'serviceFee_ascend';
+
+export type DoctorParams = PageParams & {
+  /** 省份id */
+  provinceId: string;
+  /** 科室id */
+  depId: string;
+  /** 排序 */
+  order: DoctorOrderType;
+  /** 医院等级 */
+  grade?: string;
+  /** 职称 */
+  positionalTitles?: PositionalTitles;
+  /** 价格范围 */
+  priceRange?: PriceRange;
+};

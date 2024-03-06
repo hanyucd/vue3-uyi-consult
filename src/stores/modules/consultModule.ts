@@ -44,6 +44,9 @@ export const useConsultStore = defineStore('consultModule', () => {
   // 设置开药问诊-中的选择的药品
   const setMedicinesAction = (val: Medical[]) => (consult.value.medicines = val);
 
+  // 设置医生 id
+  const setDocIdAction = (val: string) => (consult.value.docId = val);
+
   // 清空记录
   const clearConsultAction = () => (consult.value = {});
   
@@ -58,6 +61,7 @@ export const useConsultStore = defineStore('consultModule', () => {
 
     setMedicineIlnessAction,
     setMedicinesAction,
+    setDocIdAction,
     clearConsultAction,
   };
 }, {
