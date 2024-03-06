@@ -317,3 +317,16 @@ export type DoctorParams = PageParams & {
   /** 价格范围 */
   priceRange?: PriceRange;
 };
+
+export type City = {
+  id: string;
+  parentId: string;
+  name: string;
+};
+
+export type Area = {
+  id: string;
+  parentId: string;
+  name: string;
+  citys?: City[];
+};

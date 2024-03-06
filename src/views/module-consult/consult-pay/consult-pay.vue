@@ -56,7 +56,9 @@ import type { ConsultOrderPreData, ConsultOrderPreParams, PartialConsult } from 
 import type { Patient } from '@/types/user';
 import useProxyHook from '@/hooks/useProxyHook';
 import { useConsultStore } from '@/stores';
+import { ConsultTypeEnum } from '@/enums';
 import { showConfirmDialog, showDialog, showToast } from 'vant';
+import { getCreateOrderParams } from '@/utils/createOrderParamUtil';
 
 const router = useRouter();
 const consultStore = useConsultStore();
@@ -66,6 +68,11 @@ type ConsultKey = keyof PartialConsult;
 
 onMounted(() => {
   const validKeys: ConsultKey[] = [ 'type', 'illnessType', 'depId', 'illnessDesc', 'illnessTime', 'consultFlag', 'patientId', ];
+
+  // 问医生，必填字段加一个docId
+  if (consultStore.consult.type === ConsultTypeEnum.Doctor) {
+    validKeys.push('docId');
+  }
 
   const valid = validKeys.every((key) => consultStore.consult[key] !== undefined);
   if (!valid) {
@@ -97,6 +104,11 @@ const payOrderInfo = ref<ConsultOrderPreData>({} as ConsultOrderPreData);
  */
 const _getConsultOrderPre = async () => {
   const param: ConsultOrderPreParams = { type: consultStore.consult.type, illnessType: consultStore.consult.illnessType };
+  // 问医生需要带上docId
+  if (consultStore.consult.docId) {
+    param.docId = consultStore.consult.docId;
+  }
+  
   const { data: payOrderPreData } = await proxy.$api.getConsultOrderPreApi(param);
 
   payOrderInfo.value = payOrderPreData;
@@ -131,8 +143,13 @@ const submitOrder = async () => {
   if (!agree.value) return showToast('请勾选我同意支付协议');
   submitBarLoading.value = true;
 
-  const consultParam = consultStore.consult;
-  const { data: orderData } = await proxy.$api.createConsultOrderApi(consultParam);
+  const type = consultStore.consult.type;
+  const params = getCreateOrderParams(consultStore.consult, type);
+  const { data: orderData } = await proxy.$api.createConsultOrderApi(params);
+  
+  // const consultParam = consultStore.consult;
+  // const { data: orderData } = await proxy.$api.createConsultOrderApi(consultParam);
+  
   consultOrderId.value = orderData.id;
   submitBarLoading.value = false;
 

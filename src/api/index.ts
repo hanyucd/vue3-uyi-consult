@@ -72,5 +72,7 @@ export default {
   getFindDoctorPageApi: (param: object) => httpRequest(`/patient/search/doc`, param),
   // 获取医生详情
   getDoctorDetailApi: (param: object) => httpRequest(`/doc/detail`, param),
+  // 获取所有地区
+  getAllAreaApi: () => httpRequest(`/basicArea/all`),
 };
 
