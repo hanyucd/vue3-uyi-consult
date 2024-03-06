@@ -1,0 +1,222 @@
+
+.doctor-detail-page {
+  .van-nav-bar {
+    background: #dff4f1;
+  }
+  padding-top: 46px;
+  .basic-info-bg {
+    background: linear-gradient(180deg, #dff4f1 0%, rgba(44, 181, 165, 0) 100%);
+    padding: 15px;
+    .basic-info-content {
+      position: relative;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 11px 0 rgba(229, 229, 229, 0.5);
+      padding: 13px;
+      .avator-line {
+        position: relative;
+        text-align: end;
+        margin-bottom: 16px;
+        .doctor-avator {
+          width: 55px;
+          height: 55px;
+          border-radius: 50%;
+          position: absolute;
+          left: 0;
+          top: -23px;
+        }
+        .follow-btn {
+          width: 70px;
+          display: inline-block;
+          padding: 5px 15px;
+          font-size: 11px;
+          font-family: PingFang SC, PingFang SC-Regular;
+          font-weight: 400;
+        }
+      }
+      .doctor-line {
+        .doctor-name {
+          font-size: 21px;
+          font-weight: 500;
+          color: #121826;
+          margin-right: 5px;
+        }
+        .dep-info {
+          font-size: 13px;
+          font-family: PingFang SC, PingFang SC-Regular;
+          font-weight: 400;
+          color: #6f6f6f;
+        }
+      }
+      .hospital-line {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        .grade-name {
+          display: inline-block;
+          background: #677fff;
+          border-radius: 2px;
+          padding: 1px 4px;
+          font-size: 9px;
+          font-family: PingFang SC, PingFang SC-Regular;
+          font-weight: 400;
+          color: #ffffff;
+          margin-right: 3px;
+        }
+        .hospital-name {
+          font-size: 13px;
+          font-family: PingFang SC, PingFang SC-Regular;
+          font-weight: 400;
+          color: #121826;
+        }
+      }
+      .record-list {
+        font-size: 12px;
+        color: #979797;
+        display: flex;
+        align-items: center;
+        .score {
+          color: #03bc8e;
+          font-size: 16px;
+          font-weight: 600;
+          margin-right: 4px;
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+  .intro-content {
+    padding: 15px;
+    .intro-title {
+      font-size: 16px;
+      font-family: PingFang SC, PingFang SC-Medium;
+      font-weight: 500;
+      color: #121826;
+      margin-bottom: 10px;
+    }
+    .intro-pre-title {
+      font-size: 14px;
+      font-family: PingFang SC, PingFang SC-Regular;
+      font-weight: 400;
+      color: #000000;
+      margin: 5px 0;
+    }
+    .intro-desc {
+      font-size: 12px;
+      font-family: PingFang SC, PingFang SC-Regular;
+      font-weight: 400;
+      color: #3c3e42;
+    }
+  }
+  .banner-content {
+    padding: 15px;
+    .banner-box {
+      padding: 12px 15px;
+      background: linear-gradient(281deg, #16c2a3 0%, #1cabca 100%);
+      border-radius: 20px;
+      display: flex;
+      position: relative;
+      align-items: center;
+      .banner-icon {
+        margin-right: 11px;
+      }
+      .inquire-type {
+        font-size: 16px;
+        font-family: PingFang SC, PingFang SC-Medium;
+        font-weight: 500;
+        text-align: LEFT;
+        color: #ffffff;
+        margin-right: 10px;
+      }
+      .price {
+        font-size: 12px;
+        font-family: PingFang SC, PingFang SC-Medium;
+        font-weight: 500;
+        color: #fafafa;
+      }
+      .tips {
+        opacity: 0.7;
+        font-size: 12px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: 400;
+        color: #ffffff;
+      }
+      .consult-btn {
+        position: absolute;
+        right: 15px;
+        top: 22px;
+        padding: 5px 14px;
+        background: #ffffff;
+        border-radius: 27px;
+        font-size: 14px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: 400;
+        color: #16c2a3;
+      }
+    }
+  }
+  .evaluate-content {
+    padding: 0 15px;
+    margin-top: 5px;
+    .evaluate-header {
+      display: flex;
+      justify-content: space-between;
+      .evaluate-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #000000;
+        margin-right: 6px;
+      }
+      .evaluate-total {
+        font-size: 12px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: 400;
+        color: #3c3e42;
+      }
+      .rate-title {
+        font-size: 13px;
+        font-family: PingFang SC, PingFang SC-Regular;
+        font-weight: 400;
+        color: #3c3e42;
+        margin-right: 3px;
+      }
+      .rate-text {
+        font-size: 20px;
+        font-family: DIN, DIN-Medium;
+        font-weight: 500;
+        color: #16c2a3;
+      }
+    }
+    .no-evaluate {
+      margin-bottom: 11px;
+    }
+  }
+
+  .article-list {
+    margin-top: 11px;
+    padding: 0 15px;
+    .intro-title {
+      font-size: 16px;
+      font-family: PingFang SC, PingFang SC-Medium;
+      font-weight: 500;
+      color: #121826;
+      margin-bottom: 10px;
+    }
+  }
+
+  .bottom-content {
+    box-sizing: border-box;
+    padding: 15px;
+    position: absolute;
+    background-color: #ffffff;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .van-button {
+      height: 44px;
+    }
+  }
+}

@@ -1,11 +1,6 @@
 <template>
   <div class="doctor-list">
-    <van-list
-      v-model:loading="loading"
-      :finished="finished"
-      finished-text="没有更多了"
-      @load="onLoad"
-    >
+    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <doctor-card v-for="item in list" :key="item.id" :item="item" :grade="grade" />
     </van-list>
   </div>
@@ -68,7 +63,7 @@ const onLoad = async () => {
   const { data } = await proxy.$api.getFindDoctorPageApi(params.value);
   list.value.push(...data.rows);
   loading.value = false;
-  
+
   if (params.value.current >= data.pageTotal) {
     finished.value = true;
   } else {

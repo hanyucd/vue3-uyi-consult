@@ -1,6 +1,7 @@
 <template>
   <div class="doctor-card" @click="goDoctorDetail">
     <img :src="item.avatar" class="avator" alt="" />
+    
     <div class="detail">
       <p>
         <span class="doctor-name">{{ item.name }}</span><span class="doctor-other-info">{{ item.depName }} | {{ item.positionalTitles }}</span>
@@ -56,7 +57,7 @@ const goDoctorDetail = () => {
   } else {
     consultStore.setIllnessTypeAction(0);
   }
-  
+
   router.push(`/doctorDetail/${props.item.id}`);
 };
 </script>

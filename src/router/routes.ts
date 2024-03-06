@@ -128,6 +128,11 @@ const constantRouterMap: RouteRecordRaw[] = [
     component: () => import('@/views/module-consult/consult-doctor/consult-doctor.vue'),
     meta: { title: '找医生' }
   },
+  {
+    path: '/doctorDetail/:id',
+    component: () => import('@/views/module-consult/consult-doctor-detail/consult-doctor-detail.vue'),
+    meta: { title: '医生详情' }
+  },
   // 404
   {
     path: '/:pathMatch(.*)*',

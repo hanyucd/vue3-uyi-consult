@@ -70,5 +70,7 @@ export default {
   getMedicineDetailApi: (medicineId: string) => httpRequest(`/patient/medicine/${medicineId}`),
   // 获取医生列表
   getFindDoctorPageApi: (param: object) => httpRequest(`/patient/search/doc`, param),
+  // 获取医生详情
+  getDoctorDetailApi: (param: object) => httpRequest(`/doc/detail`, param),
 };
 
