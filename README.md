@@ -1,6 +1,6 @@
 # 移动端: uyi-h5
 
-技术栈：Vue3 + Typescript + Pinia + Vite + Axios + Vant + Scss + Postcss + Pnpm + Husky + Eslint + ~~Prettier~~
+技术栈：Vue3 + Typescript + Pinia + Vite + Axios + Vant + Scss + Postcss + Pnpm + Husky + Eslint
 
 次要：
 - pinia-plugin-persistedstate 适用于 Pinia 的持久化存储插件
@@ -47,7 +47,7 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 
 ### 第三方支付解决方案（支付宝）
 
-![支付宝](./display/alipay.png)
+<!-- ![支付宝](./display/alipay.png) -->
 
 **支付流程**
 
