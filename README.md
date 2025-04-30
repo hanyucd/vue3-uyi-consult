@@ -47,7 +47,7 @@ postcss-pxtorem 是 postcss 的插件，用于将像素（px）单元生成 rem 
 
 ### 第三方支付解决方案（支付宝）
 
-<!-- ![支付宝](./display/alipay.png) -->
+![支付宝](./display/alipay.png)
 
 **支付流程**
 
